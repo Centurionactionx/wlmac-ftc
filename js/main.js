@@ -248,10 +248,10 @@
     const ssAOS = function() {
         
         AOS.init( {
-            offset: 100,
-            duration: 600,
+            offset: 300,
+            duration: 400,
             easing: 'ease-in-out',
-            delay: 300,
+            delay: 200,
             once: true,
             disable: 'mobile'
         });
