@@ -169,8 +169,12 @@
 
             $(this).find('.folio-item__thumb-link').on('click', function(e) {
                 e.preventDefault();
+                
+                // Find the index of the clicked item relative to all portfolio items
+                let clickedIndex = $folioItems.index($(this).closest('.folio-item'));
+                
                 let options = {
-                    index: i,
+                    index: clickedIndex,
                     showHideOpacity: true
                 }
 
