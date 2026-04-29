@@ -3648,9 +3648,29 @@ input::-moz-focus-inner {
 }
 
 
-/* ------------------------------------------------------------------- 
- * ## hero scroll
- * ------------------------------------------------------------------- */
+/* ================================================================= 
+ * ## hero scroll & accents
+ * ================================================================= */
+.s-hero .horizontal-line {
+    width: 32px;
+    height: 8rem;
+    position: absolute;
+    bottom: 2rem;
+    right: calc(6vw + 1px);
+    z-index: 1;
+}
+
+.s-hero .horizontal-line::before {
+    content: "";
+    display: block;
+    width: 1px;
+    background-color: var(--color-1-light);
+    position: absolute;
+    left: calc(50% + 1px);
+    top: 0;
+    bottom: 0;
+}
+
 .s-hero__scroll {
     position: absolute;
     left: 6vw;
@@ -4035,6 +4055,52 @@ html.no-csstransitions .s-hero__content {
     display: block;
     width: 1px;
     background-color: var(--color-1-darker);
+    position: absolute;
+    right: calc(50% + 1px);
+    top: 0;
+    bottom: 0;
+}
+
+
+/* ================================================================= 
+ * # services
+ * ================================================================= */
+.s-services .horizontal-line {
+    width: 32px;
+    height: 15rem;
+    position: absolute;
+    top: 0;
+    right: calc(6vw + 1px);
+}
+
+.s-services .horizontal-line::before {
+    content: "";
+    display: block;
+    width: 1px;
+    background-color: var(--color-1);
+    position: absolute;
+    left: calc(50% + 1px);
+    top: 0;
+    bottom: 0;
+}
+
+
+/* ================================================================= 
+ * # portfolio
+ * ================================================================= */
+.s-portfolio .horizontal-line {
+    width: 32px;
+    height: 12rem;
+    position: absolute;
+    top: -4rem;
+    left: calc(6vw + 1px);
+}
+
+.s-portfolio .horizontal-line::before {
+    content: "";
+    display: block;
+    width: 1px;
+    background-color: var(--color-1-light);
     position: absolute;
     right: calc(50% + 1px);
     top: 0;
