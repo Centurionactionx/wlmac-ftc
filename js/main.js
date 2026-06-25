@@ -252,10 +252,10 @@
     const ssAOS = function() {
         
         AOS.init( {
-            offset: 300,
+            offset: 600,
             duration: 400,
             easing: 'ease-in-out',
-            delay: 200,
+            delay: 50,
             once: true,
             disable: 'mobile'
         });
@@ -317,6 +317,66 @@
 
 
 
+   /* EmailJS contact form
+    * ------------------------------------------------------ */
+    const ssEmailJS = function() {
+
+        const contactForm = document.getElementById('contactForm');
+        const contactStatus = document.getElementById('contactFormStatus');
+
+        if (!contactForm || !contactStatus || typeof emailjs === 'undefined') return;
+
+        const EMAILJS_SERVICE_ID = "service_15ofg9r";
+        const EMAILJS_TEMPLATE_ID = "template_5dxi081";
+        const EMAILJS_PUBLIC_KEY = "Ql9fdB8-80sRNy095";
+
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const params = {
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                message: document.getElementById('contactMessage').value
+            };
+
+            console.log('EmailJS params:', params);
+
+            if (btn) {
+                btn.innerText = 'Sending...';
+                btn.disabled = true;
+            }
+
+            contactStatus.className = 'contact-form__status';
+            contactStatus.textContent = 'Sending message...';
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+                .then(function() {
+                    contactStatus.className = 'contact-form__status contact-form__status--success';
+                    contactStatus.textContent = 'Message sent! Thank you – we will be in touch soon.';
+                    contactForm.reset();
+                    if (btn) {
+                        btn.innerText = 'Message Sent!';
+                        btn.disabled = false;
+                    }
+                }, function(error) {
+                    const errorMessage = error?.text || error?.statusText || error?.message || JSON.stringify(error);
+                    contactStatus.className = 'contact-form__status contact-form__status--error';
+                    contactStatus.textContent = 'Failed to send message. ' + errorMessage;
+                    console.error('EmailJS error:', error);
+                    if (btn) {
+                        btn.innerText = 'Failed. Try Again.';
+                        btn.disabled = false;
+                    }
+                });
+
+            return false;
+        });
+    };
+
    /* initialize
     * ------------------------------------------------------ */
     (function ssInit() {
@@ -331,6 +391,7 @@
         ssAlertBoxes();
         ssSmoothScroll();
         ssBackToTop();
+        ssEmailJS();
 
     })();
 

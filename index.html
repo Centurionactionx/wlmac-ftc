@@ -67,7 +67,7 @@
                 </ul>
             </nav> <!-- end s-header__nav-wrap -->
 
-            <a href="mailto:wlmac.ftcteam@gmail.com" class="btn btn--primary btn--small">
+            <a href="mailto:wlmacftc.reps@gmail.com" class="btn btn--primary btn--small">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z"/></svg>
                 Become a Partner
             </a>
@@ -136,7 +136,13 @@
 
             </div>
 
-            <div class="column large-6 w-900-stack s-about__intro-text">
+            <div class="column large-12 w-900-stack s-about__photo-block">
+                <div class="s-about__photo" data-aos="fade-up">
+                    <img src="images/about-photo.jpg" alt="WLMAC Robotics team photo">
+                </div>
+            </div>
+
+            <div class="column large-12 w-900-stack s-about__intro-text">
                 <h1 class="display-1" data-aos="fade-up">
                     A young program on the rise.
                 </h1>
@@ -146,10 +152,6 @@
                     Two seasons in, we field two competitive teams, build robots from scratch, and run STEM outreach across the region. 
                     FTC turns a school year into a full engineering cycle, from design reviews and fabrication to code sprints and competition strategy. Students graduate with hands-on experience in the same workflow used by real engineering teams.
                 </p>
-            </div>
-
-            <div class="column large-6 w-900-stack s-about__photo-block">
-                <div class="s-about__photo" data-aos="fade-up"></div>
             </div>
         </div>
 
@@ -487,17 +489,60 @@
             <div class="column">
                 <h3 class="h6">Get In Touch</h3>
                 <h1 class="display-1">
-                    Help build something that lasts. Sponsor a robot bumper, supply parts, 
+                    Help build something that lasts. Sponsor a robot bumper, supply parts,
                     mentor a student, or back the whole season. Tell us what you can contribute and we'll match it to the right tier of recognition.
                 </h1>
             </div>
         </div> <!-- s-footer__top -->
 
-        <div class="row h-text-center">
-            <div class="column">
-                <p class="s-contact__email">
-                    <a href="mailto:wlmac.ftcteam@gmail.com">wlmac.ftcteam@gmail.com</a>
-                </p>
+        <div class="row contact-grid">
+            <div class="column large-6 medium-12">
+                <div class="contact-card contact-card--info">
+                    <div class="contact-card__header">
+                        <h4 class="h3">Need the team?</h4>
+                        <p>We’re happy to discuss sponsorship, build support, and student mentorship opportunities.</p>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-info__label">Email</p>
+                        <p class="s-contact__email contact-info__email">
+                            <a href="mailto:wlmacftc.reps@gmail.com">wlmacftc.reps@gmail.com</a>
+                        </p>
+                        <p class="contact-info__note">
+                            This form uses EmailJS. Once configured with your service ID, template ID, and public key, submissions will be delivered directly to the team inbox.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column large-6 medium-12">
+                <div class="contact-card">
+                    <div class="contact-card__header">
+                        <h4 class="h3">Send a message</h4>
+                        <p>Questions about sponsorship, outreach, or team support? Use this form and we’ll get back to you soon.</p>
+                    </div>
+                    <form id="contactForm" class="contact-form" novalidate>
+                        <div class="row contact-form__row">
+                            <div class="column large-12">
+                                <label for="contactName">Name</label>
+                                <input id="contactName" class="h-full-width" type="text" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="column large-12">
+                                <label for="contactEmail">Email</label>
+                                <input id="contactEmail" class="h-full-width" type="email" name="email" placeholder="Your email" required>
+                            </div>
+                        </div>
+                        <div class="row contact-form__row">
+                            <div class="column large-12">
+                                <label for="contactMessage">Message</label>
+                                <textarea id="contactMessage" class="h-full-width" name="message" placeholder="Tell us what you're interested in..." rows="6" required></textarea>
+                            </div>
+                        </div>
+                        <div class="contact-form__actions">
+                            <button type="submit" class="btn btn--primary h-full-width">Send Message</button>
+                        </div>
+                        <p id="contactFormStatus" class="contact-form__status" aria-live="polite"></p>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -534,7 +579,7 @@
             </div>
 
             <div class="column large-4 medium-12 s-footer__block--end">
-                <a href="mailto:wlmac.ftcteam@gmail.com" class="btn h-full-width">Become a Partner</a>
+                <a href="mailto:wlmacftc.reps@gmail.com" class="btn h-full-width">Become a Partner</a>
 
                 <div class="ss-copyright">
                     <span>WLMAC Robotics · Season 2026/27</span>
@@ -589,12 +634,13 @@
 
         </div>
 
-    </div> end photoSwipe background
+    </div> <!-- end photoSwipe background -->
 
 
     <!-- Java Script
     ================================================== -->
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
 
