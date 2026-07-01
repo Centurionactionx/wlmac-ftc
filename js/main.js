@@ -23,23 +23,13 @@
    /* preloader
     * -------------------------------------------------- */
     const ssPreloader = function() {
-
-        $("html").addClass('ss-preload');
-
+        $("#loader, #preloader").hide();
         $WIN.on('load', function() {
 
             // force page scroll position to top at page refresh
-            $('html, body').animate({ scrollTop: 0 }, 'normal');
+            window.scrollTo(0, 0);
 
-            // will first fade out the loading animation 
-            $("#loader").fadeOut("slow", function() {
-                // will fade out the whole DIV that covers the website.
-                $("#preloader").delay(300).fadeOut("slow");
-            }); 
-            
-            // for hero content animations 
-            $("html").removeClass('ss-preload');
-            $("html").addClass('ss-loaded');
+            $("#loader, #preloader").hide();
 
         });
     };
@@ -247,19 +237,26 @@
     };
 
 
-   /* animate on scroll
+   /* scroll reveal animations
     * ------------------------------------------------------ */
-    const ssAOS = function() {
-        
-        AOS.init( {
-            offset: 600,
-            duration: 400,
-            easing: 'ease-in-out',
-            delay: 50,
-            once: true,
-            disable: 'mobile'
-        });
+    const ssScrollReveal = function() {
+        const $aosElements = $('[data-aos]');
 
+        if (!$aosElements.length) return;
+
+        $aosElements
+            .removeAttr('data-aos')
+            .removeAttr('data-aos-offset')
+            .removeAttr('data-aos-easing')
+            .removeAttr('data-aos-duration')
+            .removeAttr('data-aos-delay')
+            .removeClass('aos-init aos-animate')
+            .css({
+                opacity: '',
+                visibility: '',
+                transform: '',
+                transition: ''
+            });
     };
 
 
@@ -269,7 +266,7 @@
     const ssAlertBoxes = function() {
 
         $('.alert-box').on('click', '.alert-box__close', function() {
-            $(this).parent().fadeOut(500);
+            $(this).parent().hide();
         }); 
 
     };
@@ -286,11 +283,10 @@
             e.preventDefault();
             e.stopPropagation();
 
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top
-            }, cfg.scrollDuration, 'swing').promise().done(function () {
-                window.location.hash = target;
-            });
+            if ($target.length) {
+                window.scrollTo(0, $target.offset().top);
+            }
+            window.location.hash = target;
         });
 
     };
@@ -387,7 +383,7 @@
         ssMobileMenu();
         ssPhotoswipe();
         ssSlickSlider();
-        ssAOS();
+        ssScrollReveal();
         ssAlertBoxes();
         ssSmoothScroll();
         ssBackToTop();
