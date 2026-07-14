@@ -1,679 +1,2152 @@
 ﻿<!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en">
 <head>
-
-    <!--- basic page needs
-    ================================================== -->
     <meta charset="utf-8">
-    <title>WLMAC Robotics / FTC Sponsorship Packet — Season 2026/27</title>
+    <title>WLMAC Robotics — FTC Sponsorship · Season 2026/27</title>
     <meta name="description" content="Two FTC teams. One school. A growing robotics culture in North York built by students, backed by partners who see it early.">
     <meta name="author" content="WLMAC Robotics">
-
-    <!-- mobile specific metas
-    ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/vendor.css">
+    <meta property="og:title" content="WLMAC Robotics — FTC Sponsorship · Season 2026/27">
+    <meta property="og:description" content="Two FTC teams. One school. Built by students, backed by partners who see it early.">
+    <meta property="og:image" content="https://wlmacrobotics.ca/images/about-photo.jpg">
+    <meta property="og:type" content="website">
 
-    <!-- script
-    ================================================== -->
-    <script src="js/modernizr.js"></script>
-    <script defer src="js/fontawesome/all.min.js"></script>
-
-    <!-- favicons
-    ================================================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="images/hero-bg.jpg">
+
+    <script>document.documentElement.classList.add('js');</script>
+
+    <style>
+        /* ------------------------------------------------------------------
+           Tokens
+        ------------------------------------------------------------------ */
+        :root {
+            --navy-950: #0A1420;
+            --navy-900: #0D1B2A;      /* primary surface */
+            --navy-800: #12263A;      /* raised cards */
+            --navy-700: #17324C;
+            --line:     #233C55;
+            --line-soft:#1A2E44;
+
+            --gold-400: #F0B44C;      /* lion gold — the accent */
+            --gold-300: #F7C56A;
+            --blue-400: #6FA6E8;      /* readable robot blue for text/links */
+            --blue-600: #2E6FD0;      /* anodized channel blue */
+            --plate-blue: #1D5FC2;    /* alliance plate blue */
+            --plate-red:  #CE3038;    /* alliance plate red */
+
+            --paper:   #E9EEF4;
+            --body:    #C3CFDC;
+            --muted:   #8FA3B8;
+
+            --ok:  #7FD6A0;
+            --err: #F0908E;
+
+            --font-display: "Montserrat", "Segoe UI", sans-serif;
+            --font-body: "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+
+            --container: 1180px;
+            --radius: 14px;
+            --header-h: 72px;
+
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+            --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ------------------------------------------------------------------
+           Base
+        ------------------------------------------------------------------ */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            scroll-padding-top: calc(var(--header-h) + 16px);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            html { scroll-behavior: smooth; }
+        }
+
+        body {
+            margin: 0;
+            background: var(--navy-900);
+            color: var(--body);
+            font-family: var(--font-body);
+            font-size: 1.0625rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        img { max-width: 100%; display: block; }
+
+        h1, h2 {
+            font-family: var(--font-display);
+            color: var(--paper);
+            margin: 0 0 0.5em;
+            line-height: 1.15;
+            font-weight: 500;
+            letter-spacing: -0.015em;
+            text-wrap: balance;
+        }
+        h3, h4 {
+            font-family: var(--font-display);
+            color: var(--paper);
+            margin: 0 0 0.5em;
+            line-height: 1.3;
+            font-weight: 500;
+            letter-spacing: -0.005em;
+            text-wrap: balance;
+        }
+
+        p { margin: 0 0 1em; }
+        a { color: var(--blue-400); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+        a:hover { color: var(--gold-300); }
+
+        :focus-visible {
+            outline: 2px solid var(--gold-400);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        ::selection { background: var(--gold-400); color: var(--navy-950); }
+
+        .skip-link {
+            position: absolute;
+            left: 16px;
+            top: -56px;
+            z-index: 200;
+            background: var(--gold-400);
+            color: var(--navy-950);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px 18px;
+            border-radius: 0 0 10px 10px;
+            text-decoration: none;
+            transition: top .2s ease;
+        }
+        .skip-link:focus { top: 0; }
+
+        .container {
+            max-width: var(--container);
+            margin-inline: auto;
+            padding-inline: clamp(20px, 4vw, 32px);
+        }
+
+        .section { padding-block: clamp(72px, 10vw, 128px); }
+        .section--alt { background: var(--navy-950); }
+
+        /* Section headers */
+        .section-head { max-width: 780px; margin-bottom: clamp(40px, 6vw, 64px); }
+        .section-head h2 { font-size: clamp(1.9rem, 3.8vw, 2.8rem); }
+        .lede {
+            font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+            line-height: 1.6;
+            color: var(--body);
+            text-wrap: pretty;
+        }
+        .lede strong { color: var(--paper); font-weight: 650; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.92rem;
+            letter-spacing: 0.01em;
+            padding: 14px 26px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .15s ease;
+        }
+        .btn--gold {
+            position: relative;
+            background: var(--gold-400);
+            color: var(--navy-950);
+        }
+        .btn--gold:hover { background: var(--gold-300); color: var(--navy-950); transform: translateY(-1px); }
+        .btn:active { transform: translateY(0) scale(0.98); }
+
+        /* Mounting holes: hover a gold action and it bolts on like a plate */
+        .btn--gold::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background-image:
+                radial-gradient(circle 2.5px at 8px 8px,                             rgba(5,10,18,0.5) 0 2px, transparent 2.5px),
+                radial-gradient(circle 2.5px at calc(100% - 8px) 8px,                rgba(5,10,18,0.5) 0 2px, transparent 2.5px),
+                radial-gradient(circle 2.5px at 8px calc(100% - 8px),                rgba(5,10,18,0.5) 0 2px, transparent 2.5px),
+                radial-gradient(circle 2.5px at calc(100% - 8px) calc(100% - 8px),  rgba(5,10,18,0.5) 0 2px, transparent 2.5px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .22s var(--ease-out-quart);
+        }
+        .btn--gold:hover::before,
+        .btn--gold:focus-visible::before {
+            opacity: 1;
+        }
+        .btn--ghost {
+            border-color: var(--line);
+            color: var(--paper);
+            background: rgba(13, 27, 42, 0.35);
+        }
+        .btn--ghost:hover { border-color: var(--gold-400); color: var(--gold-300); }
+
+        /* ------------------------------------------------------------------
+           Header
+        ------------------------------------------------------------------ */
+        .site-header {
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 100;
+            height: var(--header-h);
+            display: flex;
+            align-items: center;
+            transition: background-color .25s ease, border-color .25s ease;
+            border-bottom: 1px solid transparent;
+        }
+        .site-header.is-scrolled,
+        .site-header.is-open {
+            background: rgba(10, 20, 32, 0.88);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-bottom-color: var(--line-soft);
+        }
+        .site-header .container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        .brand {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .brand img { height: 17px; width: auto; }
+        .brand span {
+            font-family: var(--font-display);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: var(--gold-400);
+        }
+        .site-nav {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+            margin-left: auto;
+        }
+        .site-nav a {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--body);
+            text-decoration: none;
+            transition: color .2s ease;
+        }
+        .site-nav a:hover { color: var(--gold-300); }
+        .site-nav a[aria-current="true"] { color: var(--gold-300); }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: none;
+        }
+        .header-actions .btn { padding: 10px 20px; font-size: 0.88rem; }
+        .header-cta .cta-short { display: none; }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--paper);
+            font-family: var(--font-display);
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 9px 14px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 860px) {
+            .menu-toggle { display: inline-block; }
+            .site-header .container { gap: 12px; }
+            .header-cta .cta-long { display: none; }
+            .header-cta .cta-short { display: inline; }
+            .brand span { display: none; }
+            .site-nav {
+                position: absolute;
+                top: var(--header-h);
+                left: 0; right: 0;
+                z-index: 1;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                background: var(--navy-950);
+                border-bottom: 1px solid var(--line-soft);
+                padding: 8px 20px 16px;
+                display: none;
+            }
+            .site-header.is-open .site-nav { display: flex; }
+            .site-nav a { padding: 14px 4px; border-bottom: 1px solid var(--line-soft); }
+            .site-nav a:last-child { border-bottom: 0; }
+        }
+
+        /* ------------------------------------------------------------------
+           Hero
+        ------------------------------------------------------------------ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100svh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .hero__bg {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background-image: url("images/hero-bg.jpg");
+            background-size: cover;
+            background-position: 72% 40%;
+        }
+        .hero__scrim {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(10,20,32,0.72) 0%, rgba(10,20,32,0.28) 45%, rgba(13,27,42,0.94) 96%),
+                linear-gradient(96deg, rgba(10,20,32,0.94) 0%, rgba(10,20,32,0.82) 34%, rgba(10,20,32,0.38) 68%, rgba(10,20,32,0.5) 100%);
+        }
+        .hero .container {
+            width: 100%;
+            padding-top: calc(var(--header-h) + clamp(40px, 8vh, 84px));
+            padding-bottom: clamp(56px, 9vh, 96px);
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+            gap: clamp(32px, 5vw, 72px);
+            align-items: center;
+        }
+        .hero__kicker {
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--blue-400);
+            margin-bottom: 1.4em;
+        }
+        @media (max-width: 560px) {
+            .kicker-extra { display: none; }
+        }
+        .hero h1 {
+            font-size: clamp(2.7rem, 6.4vw, 4.4rem);
+            font-weight: 600;
+            line-height: 1.02;
+            letter-spacing: -0.04em;
+            margin-bottom: 0.35em;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--gold-400);
+        }
+        .hero__lede {
+            font-size: clamp(1.08rem, 1.7vw, 1.3rem);
+            line-height: 1.6;
+            color: var(--body);
+            max-width: 34em;
+            margin-bottom: 2em;
+        }
+        .hero__cta { display: flex; flex-wrap: wrap; gap: 14px; }
+
+        /* Signature: alliance number plates */
+        .plates {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(20px, 3vh, 30px);
+        }
+        .plate-unit { text-align: center; }
+        .plate {
+            position: relative;
+            width: clamp(210px, 22vw, 280px);
+            padding: clamp(18px, 2vw, 26px) 16px;
+            border: 3px solid #EDF2F7;
+            border-radius: 16px;
+            box-shadow:
+                inset 0 2px 0 rgba(255,255,255,0.28),
+                inset 0 -10px 24px rgba(0,0,0,0.28),
+                0 18px 40px rgba(4, 10, 18, 0.55);
+            background-color: var(--plate-blue);
+            /* corner mounting holes */
+            background-image:
+                radial-gradient(circle 4px at 15px 15px,               rgba(5,10,18,0.55) 0 3px, transparent 4px),
+                radial-gradient(circle 4px at calc(100% - 15px) 15px,  rgba(5,10,18,0.55) 0 3px, transparent 4px),
+                radial-gradient(circle 4px at 15px calc(100% - 15px),  rgba(5,10,18,0.55) 0 3px, transparent 4px),
+                radial-gradient(circle 4px at calc(100% - 15px) calc(100% - 15px), rgba(5,10,18,0.55) 0 3px, transparent 4px);
+            transition: transform .3s ease;
+        }
+        .plate--red { background-color: var(--plate-red); }
+        .plate__num {
+            display: block;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: clamp(2.4rem, 3.9vw, 3.2rem);
+            line-height: 1;
+            letter-spacing: 0.02em;
+            color: #fff;
+            text-align: center;
+            text-shadow: 0 2px 0 rgba(0,0,0,0.25);
+        }
+        .plates .plate-unit:nth-child(1) .plate { transform: rotate(-2deg); }
+        .plates .plate-unit:nth-child(2) .plate { transform: rotate(1.4deg) translateX(14px); }
+        .plate-unit:hover .plate { transform: rotate(0) translateX(0); }
+        .plate-label {
+            margin: 14px 0 0;
+            font-family: var(--font-display);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--paper);
+        }
+        .plate-label small {
+            display: block;
+            margin-top: 3px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+        }
+
+        @media (max-width: 860px) {
+            .hero .container { grid-template-columns: 1fr; }
+            .plates {
+                flex-direction: row;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: 22px;
+            }
+            .plates .plate-unit:nth-child(2) .plate { transform: rotate(1.4deg); }
+            .plate { width: min(46vw, 230px); }
+        }
+
+        /* Hero entrance: staging the robot (motion-safe only) --------------- */
+        @media (prefers-reduced-motion: no-preference) {
+            .hero__bg { animation: hero-settle 1.6s var(--ease-out-quint) both; }
+            .hero__kicker { animation: rise-in .65s var(--ease-out-quart) .05s backwards; }
+            .hero h1 { animation: rise-in .65s var(--ease-out-quart) .14s backwards; }
+            .hero__lede { animation: rise-in .65s var(--ease-out-quart) .26s backwards; }
+            .hero__cta { animation: rise-in .65s var(--ease-out-quart) .36s backwards; }
+            .plates .plate-unit:nth-child(1) { animation: plate-mount .7s var(--ease-out-expo) .5s backwards; }
+            .plates .plate-unit:nth-child(2) { animation: plate-mount .7s var(--ease-out-expo) .66s backwards; }
+            .tape { animation: tape-lay .9s var(--ease-out-expo) .78s backwards; transform-origin: left center; }
+        }
+        @keyframes hero-settle { from { transform: scale(1.045); } }
+        @keyframes rise-in { from { opacity: 0; transform: translateY(16px); } }
+        @keyframes plate-mount { from { opacity: 0; transform: translateY(-20px); } }
+        @keyframes tape-lay { from { transform: scaleX(0); } }
+
+        /* Field-tape divider */
+        .tape {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 12px;
+            background:
+                repeating-linear-gradient(90deg,
+                    var(--blue-600) 0 110px, transparent 110px 134px) 0 0 / 100% 3px no-repeat,
+                repeating-linear-gradient(90deg,
+                    var(--gold-400) 0 74px, transparent 74px 98px) 46px 9px / 100% 3px no-repeat;
+            opacity: 0.85;
+        }
+
+        /* ------------------------------------------------------------------
+           Stats band
+        ------------------------------------------------------------------ */
+        .stats { background: var(--navy-950); border-block: 1px solid var(--line-soft); }
+        .stats .container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            padding-block: clamp(34px, 4vw, 48px);
+            gap: clamp(20px, 3vw, 32px);
+        }
+        .stat { border-left: 1px solid var(--line-soft); padding-left: clamp(16px, 2vw, 26px); }
+        .stat:first-child { border-left: 0; padding-left: 0; }
+        .stat__num {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+            color: var(--gold-400);
+            line-height: 1.1;
+        }
+        .stat__label {
+            margin: 6px 0 0;
+            font-size: 0.86rem;
+            line-height: 1.45;
+            color: var(--muted);
+        }
+        @media (max-width: 860px) {
+            .stats .container { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+            .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+            .stat:last-child { grid-column: 1 / -1; border-left: 0; padding-left: 0; border-top: 1px solid var(--line-soft); padding-top: 22px; }
+        }
+
+        /* ------------------------------------------------------------------
+           Program
+        ------------------------------------------------------------------ */
+        .program-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+            gap: clamp(32px, 5vw, 64px);
+            align-items: center;
+            margin-bottom: clamp(48px, 7vw, 88px);
+        }
+        .program-photo { position: relative; }
+        .program-photo img {
+            border-radius: var(--radius);
+            border: 1px solid var(--line-soft);
+            width: 100%;
+            height: auto;
+        }
+        .program-photo figcaption {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--muted);
+        }
+        @media (max-width: 860px) {
+            .program-grid { grid-template-columns: 1fr; }
+        }
+
+        .cards-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        @media (max-width: 720px) { .cards-4 { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--navy-800);
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius);
+            padding: clamp(24px, 3vw, 32px);
+        }
+        .card h3 { font-size: 1.25rem; margin-bottom: 0.6em; }
+        .card p { margin: 0; font-size: 0.97rem; color: var(--body); }
+
+        .card--team { display: flex; gap: 22px; align-items: flex-start; }
+        .plate--mini {
+            flex: none;
+            width: 108px;
+            padding: 12px 8px;
+            border-width: 2px;
+            border-radius: 10px;
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,0.25),
+                inset 0 -6px 14px rgba(0,0,0,0.25),
+                0 8px 18px rgba(4, 10, 18, 0.4);
+            background-image:
+                radial-gradient(circle 2.5px at 9px 9px,               rgba(5,10,18,0.55) 0 2px, transparent 2.5px),
+                radial-gradient(circle 2.5px at calc(100% - 9px) 9px,  rgba(5,10,18,0.55) 0 2px, transparent 2.5px),
+                radial-gradient(circle 2.5px at 9px calc(100% - 9px),  rgba(5,10,18,0.55) 0 2px, transparent 2.5px),
+                radial-gradient(circle 2.5px at calc(100% - 9px) calc(100% - 9px), rgba(5,10,18,0.55) 0 2px, transparent 2.5px);
+        }
+        .plate--mini .plate__num { font-size: 1.3rem; letter-spacing: 0.02em; }
+        @media (max-width: 480px) {
+            .card--team { flex-direction: column; }
+        }
+
+        /* ------------------------------------------------------------------
+           Sponsorship
+        ------------------------------------------------------------------ */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(24px, 3vw, 40px);
+            margin-bottom: clamp(56px, 8vw, 96px);
+        }
+        .benefit { border-top: 3px solid var(--gold-400); padding-top: 20px; }
+        .benefit h3 { font-size: 1.15rem; }
+        .benefit p { font-size: 0.95rem; color: var(--muted); margin: 0; }
+        @media (max-width: 780px) { .benefits { grid-template-columns: 1fr; gap: 28px; } }
+
+        .tiers-head h3 {
+            font-size: clamp(1.5rem, 2.6vw, 2rem);
+            margin-bottom: 0.4em;
+        }
+        .tiers {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-block: 32px clamp(56px, 8vw, 96px);
+            align-items: stretch;
+        }
+        @media (max-width: 900px) { .tiers { grid-template-columns: 1fr; max-width: 560px; } }
+
+        .tier {
+            display: flex;
+            flex-direction: column;
+            background: var(--navy-800);
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius);
+            padding: clamp(26px, 3vw, 34px);
+            position: relative;
+        }
+        .tier--flagship {
+            border-color: var(--gold-400);
+            box-shadow: 0 0 0 1px var(--gold-400), 0 24px 60px rgba(4, 10, 18, 0.5);
+        }
+        .tier__tag {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+        .tier--flagship .tier__tag { color: var(--gold-400); }
+        .tier__flag {
+            position: absolute;
+            top: -1px; right: 22px;
+            background: var(--gold-400);
+            color: var(--navy-950);
+            font-family: var(--font-display);
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 10px;
+            border-radius: 0 0 8px 8px;
+        }
+        .tier h3 { font-size: 1.5rem; margin-bottom: 4px; }
+        .tier__price {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--gold-400);
+            margin-bottom: 20px;
+        }
+        .tier__intro { font-size: 0.88rem; color: var(--muted); margin-bottom: 14px; }
+        .tier ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 11px;
+            font-size: 0.95rem;
+        }
+        .tier li { padding-left: 22px; position: relative; }
+        .tier li::before {
+            content: "";
+            position: absolute;
+            left: 2px; top: 0.55em;
+            width: 8px; height: 8px;
+            background: var(--gold-400);
+            border-radius: 2px;
+        }
+        .tier__cta {
+            margin-top: auto;
+            padding-top: 22px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: var(--gold-400);
+            text-decoration: none;
+        }
+        .tier__cta:hover { color: var(--gold-300); text-decoration: underline; }
+        .tiers-note {
+            font-size: 0.95rem;
+            color: var(--muted);
+            max-width: 640px;
+            margin-top: -28px;
+            margin-bottom: clamp(56px, 8vw, 96px);
+        }
+        .tiers-note strong { color: var(--body); }
+
+        /* Budget */
+        .budget-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+            gap: clamp(32px, 5vw, 72px);
+            align-items: start;
+        }
+        @media (max-width: 900px) { .budget-grid { grid-template-columns: 1fr; } }
+        .budget-grid h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+        .budget-grid .side p { font-size: 1rem; }
+
+        .budget {
+            font-size: 0.92rem;
+            border: 1px solid var(--line-soft);
+            border-radius: var(--radius);
+            background: var(--navy-800);
+            overflow: hidden;
+        }
+        .budget__row {
+            display: grid;
+            grid-template-columns: 66px minmax(0, 1fr) 84px;
+            gap: 8px 16px;
+            align-items: center;
+            padding: 13px 20px;
+            border-top: 1px solid var(--line-soft);
+        }
+        .budget__row:first-child { border-top: 0; }
+        .budget__cat {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--blue-400);
+        }
+        .budget__item { color: var(--body); }
+        .budget__item .bar {
+            display: block;
+            height: 4px;
+            margin-top: 7px;
+            border-radius: 2px;
+            background: var(--navy-700);
+            overflow: hidden;
+        }
+        .budget__item .bar i {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-400), var(--gold-300));
+            border-radius: 2px;
+        }
+        .budget__amt {
+            text-align: right;
+            color: var(--paper);
+            font-weight: 600;
+        }
+        .budget__row--total {
+            background: var(--navy-950);
+            border-top: 2px solid var(--line);
+        }
+        .budget__row--total .budget__item { font-weight: 600; color: var(--paper); }
+        .budget__row--total .budget__amt { color: var(--gold-400); font-weight: 600; font-size: 1rem; }
+        @media (max-width: 520px) {
+            .budget__row { grid-template-columns: minmax(0, 1fr) 84px; }
+            .budget__cat { grid-column: 1 / -1; margin-bottom: -6px; }
+        }
+
+        /* ------------------------------------------------------------------
+           Season gallery
+        ------------------------------------------------------------------ */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(20px, 2.6vw, 32px);
+        }
+        @media (max-width: 1000px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 620px)  { .gallery { grid-template-columns: 1fr; } }
+
+        .shot { margin: 0; }
+        .shot__frame {
+            display: block;
+            width: 100%;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--line-soft);
+            aspect-ratio: 4 / 3;
+        }
+        .shot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s ease;
+        }
+        .shot:hover img { transform: scale(1.035); }
+        .shot figcaption { padding-top: 14px; }
+        .shot__cat {
+            font-family: var(--font-display);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gold-400);
+        }
+        .shot__title {
+            display: block;
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--paper);
+            font-size: 1rem;
+            margin: 5px 0 4px;
+        }
+        .shot__note { font-size: 0.88rem; color: var(--muted); margin: 0; }
+
+        .gallery-foot { text-align: center; }
+
+        /* ------------------------------------------------------------------
+           Event lightbox
+        ------------------------------------------------------------------ */
+        .lightbox {
+            width: min(920px, calc(100vw - 32px));
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--navy-900);
+            color: var(--body);
+            padding: 0;
+        }
+        .lightbox::backdrop {
+            background: rgba(4, 10, 18, 0.86);
+        }
+        .lightbox__inner { padding: 16px 18px 20px; }
+        .lightbox__head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .lightbox__heading { margin: 0; min-width: 0; }
+        .lightbox__title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--paper);
+            font-size: 1.05rem;
+        }
+        .lightbox__count {
+            color: var(--muted);
+            font-size: 0.85rem;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+        .lightbox__close {
+            flex: none;
+            width: 36px;
+            height: 36px;
+            background: none;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--paper);
+            font-size: 1rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: border-color .2s ease, color .2s ease;
+        }
+        .lightbox__close:hover { border-color: var(--gold-400); color: var(--gold-300); }
+        .lightbox__stage { position: relative; }
+        .lightbox__track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            border-radius: 10px;
+            background: var(--navy-950);
+            scrollbar-width: none;
+        }
+        .lightbox__track::-webkit-scrollbar { display: none; }
+        .lightbox__slide {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox__slide img {
+            width: 100%;
+            height: min(62vh, 540px);
+            object-fit: contain;
+        }
+        .lightbox__nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: rgba(10, 20, 32, 0.82);
+            color: var(--paper);
+            cursor: pointer;
+            transition: border-color .2s ease, color .2s ease;
+        }
+        .lightbox__nav:hover { border-color: var(--gold-400); color: var(--gold-300); }
+        .lightbox__nav--prev { left: 12px; }
+        .lightbox__nav--next { right: 12px; }
+        .lightbox__note {
+            margin: 12px 0 0;
+            font-size: 0.92rem;
+            color: var(--muted);
+            min-height: 1.4em;
+        }
+        .lightbox__timer {
+            height: 3px;
+            border-radius: 2px;
+            background: var(--navy-700);
+            margin-top: 12px;
+            overflow: hidden;
+        }
+        .lightbox__timer i {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: var(--gold-400);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            .lightbox__timer.is-running i { animation: lightbox-timer 4s linear infinite; }
+        }
+        @keyframes lightbox-timer { to { width: 100%; } }
+        @media (prefers-reduced-motion: reduce) {
+            .lightbox__timer { display: none; }
+        }
+        .lightbox--single .lightbox__nav,
+        .lightbox--single .lightbox__count,
+        .lightbox--single .lightbox__timer { display: none; }
+        @media (max-width: 560px) {
+            .lightbox__inner { padding: 12px 12px 16px; }
+            .lightbox__nav { width: 38px; height: 38px; }
+            .lightbox__slide img { height: min(58vh, 420px); }
+        }
+        .gallery-more { display: none; margin-top: 30px; }
+        @media (max-width: 620px) {
+            .gallery--collapsed .shot:nth-child(n+5) { display: none; }
+            .gallery--collapsed ~ .gallery-foot .gallery-more { display: inline-flex; }
+        }
+
+        /* ------------------------------------------------------------------
+           Contact
+        ------------------------------------------------------------------ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+            gap: clamp(24px, 3vw, 40px);
+            align-items: start;
+        }
+        @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+
+        .contact-info .email-line {
+            display: block;
+            font-weight: 600;
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            color: var(--gold-400);
+            text-decoration: none;
+            margin: 6px 0 26px;
+            word-break: break-all;
+        }
+        .contact-info .email-line:hover { color: var(--gold-300); text-decoration: underline; }
+        .contact-info h3 { font-size: 1.1rem; margin: 26px 0 10px; }
+        .steps {
+            list-style: none;
+            counter-reset: step;
+            margin: 0; padding: 0;
+            display: grid;
+            gap: 12px;
+        }
+        .steps li {
+            counter-increment: step;
+            position: relative;
+            padding-left: 42px;
+            font-size: 0.95rem;
+        }
+        .steps li::before {
+            content: counter(step, decimal-leading-zero);
+            position: absolute;
+            left: 0; top: 0.15em;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--blue-400);
+        }
+        .contact-info address {
+            font-style: normal;
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+        .contact-note {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        .contact-form-card { background: var(--navy-800); border: 1px solid var(--line-soft); border-radius: var(--radius); padding: clamp(26px, 3.4vw, 40px); }
+        .contact-form-card h3 { font-size: 1.35rem; margin-bottom: 6px; }
+        .contact-form-card > p { font-size: 0.95rem; color: var(--muted); margin-bottom: 26px; }
+
+        .field { margin-bottom: 18px; }
+        .field label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            color: var(--paper);
+            margin-bottom: 7px;
+        }
+        .field label small { font-weight: 400; color: var(--muted); }
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            background: var(--navy-950);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            color: var(--paper);
+            font-family: var(--font-body);
+            font-size: 0.97rem;
+            padding: 13px 15px;
+            transition: border-color .2s ease, box-shadow .2s ease;
+        }
+        .field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 21px) 50%, calc(100% - 15px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+        .field input::placeholder, .field textarea::placeholder { color: #7E93AA; }
+        .field input[aria-invalid="true"],
+        .field textarea[aria-invalid="true"] { border-color: var(--err); }
+        .field input:focus, .field select:focus, .field textarea:focus {
+            outline: none;
+            border-color: var(--gold-400);
+            box-shadow: 0 0 0 3px rgba(240, 180, 76, 0.18);
+        }
+        .field textarea { resize: vertical; min-height: 140px; }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+
+        .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+        .form-status {
+            margin: 14px 0 0;
+            font-size: 0.92rem;
+            min-height: 1.4em;
+            color: var(--muted);
+        }
+        .form-status--ok { color: var(--ok); }
+        .form-status--err { color: var(--err); }
+
+        .status-check {
+            display: inline-block;
+            vertical-align: -3px;
+            margin-right: 7px;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            .form-status--ok .status-check path {
+                stroke-dasharray: 25;
+                stroke-dashoffset: 25;
+                animation: check-draw .45s var(--ease-out-quart) .1s forwards;
+            }
+        }
+        @keyframes check-draw { to { stroke-dashoffset: 0; } }
+
+        /* Alliance-color burst when a message is sent */
+        .confetti-bit {
+            position: fixed;
+            z-index: 300;
+            width: 7px;
+            height: 11px;
+            border-radius: 2px;
+            pointer-events: none;
+            animation: confetti-pop .8s var(--ease-out-quart) forwards;
+        }
+        @keyframes confetti-pop {
+            0% { opacity: 1; transform: translate(-50%, -50%) rotate(0deg); }
+            100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) + 46px)) rotate(var(--rot)); }
+        }
+
+        /* Beacon: the contact card pulses when a partner CTA lands here */
+        @media (prefers-reduced-motion: no-preference) {
+            .contact-form-card.is-beckoned {
+                animation: form-beacon 1s var(--ease-out-quart) 2;
+            }
+        }
+        @keyframes form-beacon {
+            0% { box-shadow: 0 0 0 0 rgba(240, 180, 76, 0.5); }
+            100% { box-shadow: 0 0 0 24px rgba(240, 180, 76, 0); }
+        }
+
+        /* ------------------------------------------------------------------
+           Footer
+        ------------------------------------------------------------------ */
+        .site-footer {
+            background: var(--navy-950);
+            border-top: 1px solid var(--line-soft);
+            padding-block: clamp(48px, 6vw, 72px) 36px;
+            font-size: 0.93rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: clamp(28px, 4vw, 56px);
+            margin-bottom: 48px;
+        }
+        @media (max-width: 780px) { .footer-grid { grid-template-columns: 1fr; } }
+        .site-footer h4 {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+        .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+        .site-footer .brand { margin-bottom: 16px; }
+        .site-footer .brand img { height: 15px; }
+        .footer-blurb { color: var(--muted); max-width: 34em; }
+        .footer-bottom {
+            border-top: 1px solid var(--line-soft);
+            padding-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: var(--muted);
+        }
+        .footer-bottom a { color: var(--muted); text-decoration: none; }
+        .footer-bottom a:hover { color: var(--gold-300); }
+
+        /* ------------------------------------------------------------------
+           Staggered group reveals (motion-safe only): stats, tiers,
+           gallery, and budget are real sibling lists; nothing else
+           animates on scroll. Content is visible by default — the
+           entrance animation only plays when JS marks a group visible,
+           so hidden tabs, print, and no-JS all get a complete page.
+        ------------------------------------------------------------------ */
+        @media (prefers-reduced-motion: no-preference) {
+            [data-stagger].is-visible > * {
+                animation: rise-in .55s var(--ease-out-quart) backwards;
+                animation-delay: calc(var(--i, 0) * 45ms);
+            }
+            /* The budget draws itself: bars grow once the table is in view */
+            .budget.is-visible .bar i {
+                transform-origin: left center;
+                animation: bar-draw .7s var(--ease-out-quint) backwards;
+                animation-delay: calc(var(--i, 0) * 45ms + 250ms);
+            }
+        }
+        @keyframes bar-draw { from { transform: scaleX(0); } }
+        @media (prefers-reduced-motion: reduce) {
+            .shot img, .plate, .btn,
+            .btn--gold::before { transition: none !important; }
+            .shot:hover img { transform: none; }
+        }
+        @media print {
+            [data-stagger] > *, .budget .bar i, .hero * { animation: none !important; }
+        }
+    </style>
 </head>
 
 <body id="top">
 
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- preloader
-    ================================================== -->
-    <div id="preloader">
-        <div id="loader" class="dots-fade">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-
-
-    <!-- header
-    ================================================== -->
-    <header class="s-header">
-
-        <div class="s-header__logo">
-            <a href="index.html">
-                <img src="images/logo.svg" alt="WLMAC Robotics">
-            </a>
-        </div>
-
-        <div class="s-header__content">
-    
-            <nav class="s-header__nav-wrap">
-                <ul class="s-header__nav">
-                    <li><a class="smoothscroll" href="#hero" title="Intro">Home</a></li>
-                    <li><a class="smoothscroll" href="#about" title="About">About</a></li>
-                    <li><a class="smoothscroll" href="#services" title="Sponsorship">Sponsorship</a></li>
-                    <li><a class="smoothscroll" href="#portfolio" title="Season">Season</a></li>
-                </ul>
-            </nav> <!-- end s-header__nav-wrap -->
-
-            <a href="mailto:hello@wlmacrobotics.ca" class="btn btn--primary btn--small">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 0l-6 22-8.129-7.239 7.802-8.234-10.458 7.227-7.215-1.754 24-12zm-15 16.668v7.332l3.258-4.431-3.258-2.901z"/></svg>
-                Become a Partner
+    <!-- header ========================================================= -->
+    <header class="site-header">
+        <div class="container">
+            <a class="brand" href="#top" aria-label="WLMAC Robotics — back to top">
+                <img src="images/logo.svg" alt="WLMAC">
+                <span>ROBOTICS</span>
             </a>
 
-        </div> <!-- end header-content -->
+            <nav class="site-nav" id="siteNav" aria-label="Main">
+                <a href="#program">Program</a>
+                <a href="#sponsorship">Sponsorship</a>
+                <a href="#budget">Budget</a>
+                <a href="#season">Season</a>
+            </nav>
 
-        <a class="s-header__menu-toggle" href="#0"><span>Menu</span></a>
+            <div class="header-actions">
+                <a class="btn btn--gold header-cta" href="#contact">
+                    <span class="cta-long">Become a partner</span>
+                    <span class="cta-short">Sponsor</span>
+                </a>
+                <button class="menu-toggle" aria-expanded="false" aria-controls="siteNav">Menu</button>
+            </div>
+        </div>
+    </header>
 
-    </header> <!-- end s-header -->
+    <main id="main">
 
+    <!-- hero =========================================================== -->
+    <section class="hero" aria-label="Introduction">
+        <div class="hero__bg" role="img" aria-label="Two WLMAC robots, numbers 27964 and 32514, staged on a competition field"></div>
+        <div class="hero__scrim"></div>
 
-    <!-- hero
-    ================================================== -->
-    <section id="hero" class="s-hero target-section">
+        <div class="container">
+            <div>
+                <p class="hero__kicker">FIRST Tech Challenge <span class="kicker-extra">· William Lyon Mackenzie CI </span>· North York, Toronto</p>
+                <h1>Built from <em>scratch.</em></h1>
+                <p class="hero__lede">
+                    Two FTC teams. One school. WLMAC Robotics designs, machines, codes, and drives
+                    competition robots entirely student-run. We're looking for partners
+                    who want in early.
+                </p>
+                <div class="hero__cta">
+                    <a class="btn btn--gold" href="#contact">Become a partner</a>
+                    <a class="btn btn--ghost" href="#sponsorship">See what your money buys</a>
+                </div>
+            </div>
 
-        <div class="s-hero__bg">
-            <div class="gradient-overlay"></div>
+            <div class="plates" aria-label="Our two competition teams">
+                <div class="plate-unit">
+                    <div class="plate" role="img" aria-label="Blue alliance number plate reading 27964">
+                        <span class="plate__num">27964</span>
+                    </div>
+                    <p class="plate-label">CyberLyons <small>FTC Team · Est. 2024</small></p>
+                </div>
+                <div class="plate-unit">
+                    <div class="plate plate--red" role="img" aria-label="Red alliance number plate reading 32514">
+                        <span class="plate__num">32514</span>
+                    </div>
+                    <p class="plate-label">MechLyons <small>FTC Team · Est. 2025</small></p>
+                </div>
+            </div>
         </div>
 
-        <div class="row s-hero__content">
-            <div class="column">
+        <div class="tape" aria-hidden="true"></div>
+    </section>
 
-                <h1>Built from scratch.</h1>
-                <div class="s-hero__content-about">
+    <!-- stats ========================================================== -->
+    <section class="stats" aria-label="Program at a glance">
+        <div class="container" data-stagger>
+            <div class="stat">
+                <p class="stat__num">2</p>
+                <p class="stat__label">Competitive FTC teams, one school</p>
+            </div>
+            <div class="stat">
+                <p class="stat__num">200+</p>
+                <p class="stat__label">Students reached through outreach</p>
+            </div>
+            <div class="stat">
+                <p class="stat__num">3</p>
+                <p class="stat__label">Partner schools across North York</p>
+            </div>
+            <div class="stat">
+                <p class="stat__num">6+</p>
+                <p class="stat__label">Competitions in our second season</p>
+            </div>
+            <div class="stat">
+                <p class="stat__num">$10k</p>
+                <p class="stat__label">Season budget, fully itemized below</p>
+            </div>
+        </div>
+    </section>
 
-                    <p>
-                    Two FTC teams. One school. A growing robotics culture<br>
-                    in North York built by students, backed by partners<br>
-                    who see it early.
+    <!-- program ======================================================== -->
+    <section id="program" class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>A young program on the rise.</h2>
+                <p class="lede">
+                    WLMAC Robotics is the student-run FIRST Tech Challenge program at William Lyon
+                    Mackenzie CI. Two seasons in, we field <strong>two competitive teams</strong>, build robots
+                    from scratch, and run STEM outreach across the region. FTC turns a school year into a
+                    full engineering cycle: design reviews, fabrication, code sprints, competition
+                    strategy. Students graduate having shipped real hardware.
+                </p>
+            </div>
+
+            <div class="program-grid">
+                <figure class="program-photo" style="margin:0">
+                    <img src="images/about-photo.jpg" width="1400" height="781" loading="lazy" alt="The WLMAC Robotics team in blue Mackenzie Lyons shirts, posing in the school gym with both competition robots">
+                    <figcaption>The 2025/26 roster, with both robots on the table.</figcaption>
+                </figure>
+                <div>
+                    <p class="lede" style="margin-bottom:1.2em">
+                        The robots, the outreach, the budget: everything on this page was
+                        planned and executed by students. The school hosts us; sponsors make
+                        the season possible.
                     </p>
-    
-                    <footer>
-                        <div class="s-hero__content-social">
-                            <a href="https://www.instagram.com/wlmac.cyberlyons" title="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
-                            <!-- <a href="https://wlmacrobotics.ca" title="Website"><i class="fas fa-globe" aria-hidden="true"></i></a> -->
-                        </div>
-                    </footer>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="s-hero__scroll">
-            <a href="#about" class="s-hero__scroll-link smoothscroll">
-                Scroll Down
-            </a>
-        </div>
-
-        <div class="horizontal-line"></div>
-
-    </section> <!-- end s-hero -->
-
-
-    <!-- about
-    ================================================== -->
-    <section id="about" class="s-about">
-
-        <div class="horizontal-line"></div>
-
-        <div class="row">
-            <div class="column large-12">
-
-                <div class="section-title" data-num="01" data-aos="fade-up">
-                    <h3 class="h6">The Program · Outreach · Impact</h3>
-                </div>
-
-            </div>
-
-            <div class="column large-12 w-900-stack s-about__photo-block">
-                <div class="s-about__photo" data-aos="fade-up">
-                    <img src="images/about-photo.jpg" alt="WLMAC Robotics team photo">
+                    <p>
+                        We compete in FIRST Tech Challenge, the international robotics league where teams
+                        of students design and build 18-inch robots to play a new game each year. Matches
+                        are won in alliances, seasons are won in the shop.
+                    </p>
                 </div>
             </div>
 
-            <div class="column large-12 w-900-stack s-about__intro-text">
-                <h1 class="display-1" data-aos="fade-up">
-                    A young program on the rise.
-                </h1>
-
-                <p class="lead" data-aos="fade-up">
-                    WLMAC Robotics is the student-run FIRST Tech Challenge program at William Lyon Mackenzie CI in North York, Toronto. 
-                    Two seasons in, we field two competitive teams, build robots from scratch, and run STEM outreach across the region. 
-                    FTC turns a school year into a full engineering cycle, from design reviews and fabrication to code sprints and competition strategy. Students graduate with hands-on experience in the same workflow used by real engineering teams.
-                </p>
-            </div>
-        </div>
-
-        <div class="row block-large-1-2 block-tab-full s-about__process item-list">
-            <div class="column item item-process" data-aos="fade-up">
-                <h3 class="item-title">CyberLyons · #27964</h3>
-                <p>
-                CyberLyons, one of WLMAC Robotics's two competitive FTC teams. 
-                It builds, codes, tests, and competes as part of the same student-run program, 
-                working through the full FTC cycle of design reviews, fabrication, code sprints, strategy, and competition.
-                </p>
-            </div>
-            <div class="column item item-process" data-aos="fade-up">
-                <h3 class="item-title">MechLyons · #32514</h3>
-                <p>
-                MechLyons is one of WLMAC Robotics' two competitive FTC teams. 
-                It builds, codes, tests, and competes as part of the same student-run program, 
-                helping grow a robotics culture at William Lyon Mackenzie CI and across North York.
-                </p>
-            </div>
-            <div class="column item item-process" data-aos="fade-up">
-                <h3 class="item-title">Outreach</h3>
-                <p>
-                We have reached 200+ students through 5 outreach events and 3 partner schools. 
-                From MSEO 2026 workshops to our Library Open House, Grade 9 Night, and community workshops, 
-                we are building the local STEM pipeline season by season.
-                </p>
-            </div>
-            <div class="column item item-process" data-aos="fade-up">
-                <h3 class="item-title">Compete</h3>
-                <p>
-                FTC gives students engineering they can hold, run, and break. 
-                Across 6+ competitions in our second year running, both teams test months of build work, 
-                strategy, driving, coding, and iteration against top teams in the region.
-                </p>
-            </div>
-        </div>
-
-    </section> <!-- end s-about -->
-
-
-    <!-- sponsorship
-    ================================================== -->
-    <section id="services" class="s-services">
-
-        <div class="horizontal-line"></div>
-
-        <div class="row">
-            <div class="column large-12">
-                <div class="section-title" data-num="02" data-aos="fade-up">
-                    <h3 class="h6">Why Partner With Us</h3>
-                </div>
-            </div>
-            <div class="column large-6 w-900-stack">
-                <h1 class="display-1" data-aos="fade-up">
-                    What sponsors actually get.
-                </h1>
-            </div>
-            <div class="column large-6 w-900-stack">
-                <p class="lead" data-aos="fade-up">
-                We treat sponsorship like a partnership, not a donation. Your brand moves with the robot, 
-                the team, the school, and every event we touch from a 1,400-student campus to community demos across North York. 
-                Each tier includes everything to its left, and every partner gets a direct line to the team.
-                </p>
-            </div>
-        </div>
-
-        <div class="row block-large-1-3 block-tab-full s-services__highlights item-list">
-            <div class="column item item-service" data-aos="fade-up">
-                <span class="service-icon service-icon--robot-logo"></span>
-                <h3 class="item-title">Logo on robot</h3>
-                <p>
-                Premium placement on a competing FTC robot, photographed and filmed all season.
-                </p>
-            </div>
-            <div class="column item item-service" data-aos="fade-up">
-                <span class="service-icon service-icon--team-apparel"></span>
-                <h3 class="item-title">Logo on team apparel</h3>
-                <p>
-                Worn at qualifiers, demos, and outreach in front of hundreds.
-                </p>
-            </div>
-            <div class="column item item-service" data-aos="fade-up">
-                <span class="service-icon service-icon--frontend"></span>
-                <h3 class="item-title">Campus &amp; social</h3>
-                <p>
-                Visibility across a 1,400-student school and our growing Instagram.
-                </p>
-            </div>
-        </div>
-
-        <div class="row s-services__tiers-heading" data-aos="fade-up">
-            <div class="column large-12">
-                <h2 class="h2">Sponsorship tiers</h2>
-            </div>
-        </div>
-
-        <div class="row block-large-1-3 block-tab-full s-services__services item-list">
-            <div class="column item item-service" data-aos="fade-up">
-                <span class="service-icon service-icon--illustration"></span>
-                <h3 class="item-title">Tier I · Cub · $200-$499</h3>
-                <p>
-                Name on team website and sponsor wall, recognition in season recap post, 
-                logo on team apparel and jerseys, and named in all season media.
-                </p>
-            </div>
-            <div class="column item item-service" data-aos="fade-up">
-                <span class="service-icon service-icon--ecommerce"></span>
-                <h3 class="item-title">Tier II · Challenger · $500-$1,499</h3>
-                <p>
-                Everything in Cub, plus logo on pit display and printed materials, 
-                a dedicated social media post, and an end-of-season impact report.
-                </p>
-            </div>
-            <div class="column item item-service" data-aos="fade-up">
-                <span class="service-icon service-icon--frontend"></span>
-                <h3 class="item-title">Tier III · Lyon Champion · $1,000+</h3>
-                <p>
-                Our flagship tier. Everything in Challenger, plus prominent logo on a competing robot, 
-                a sponsor showcase invite, and a live robot demo at your site.
-                </p>
-            </div>
-        </div>
-
-        <div class="row s-services__budget" data-aos="fade-up">
-            <div class="column large-5 w-900-stack">
-                <h3 class="item-title">A lean budget for two teams</h3>
-                <p>
-                Our season runs roughly $10,000 CAD across CyberLyons and MechLyons. Donated tools, parts, 
-                or services reduce required cash. Additional funding means more qualifiers attended.
-                </p>
-            </div>
-            <div class="column large-7 w-900-stack">
-                <div class="budget-table">
-                    <div class="budget-row budget-row--head">
-                        <span>Category</span>
-                        <span>Line item</span>
-                        <span>CAD</span>
+            <div class="cards-4">
+                <div class="card card--team">
+                    <div class="plate plate--mini" role="img" aria-label="Blue alliance plate, team 27964">
+                        <span class="plate__num">27964</span>
                     </div>
-                    <div class="budget-row"><span>Reg.</span><span>FTC team registration · 2 teams</span><span>$600</span></div>
-                    <div class="budget-row"><span>Reg.</span><span>Qualifier &amp; event entry fees</span><span>$1,000</span></div>
-                    <div class="budget-row"><span>Build</span><span>Robot parts &amp; hardware · 2 robots</span><span>$3,200</span></div>
-                    <div class="budget-row"><span>Build</span><span>Control system &amp; electronics</span><span>$1,400</span></div>
-                    <div class="budget-row"><span>Build</span><span>Fabrication &amp; prototyping materials</span><span>$1,200</span></div>
-                    <div class="budget-row"><span>Build</span><span>Tools &amp; build-space supplies</span><span>$600</span></div>
-                    <div class="budget-row"><span>Brand</span><span>Team apparel &amp; sponsor branding</span><span>$800</span></div>
-                    <div class="budget-row"><span>Brand</span><span>Pit display &amp; presentation</span><span>$400</span></div>
-                    <div class="budget-row"><span>Reach</span><span>Outreach &amp; demo supplies</span><span>$400</span></div>
-                    <div class="budget-row"><span>Comp.</span><span>Travel &amp; competition days</span><span>$400</span></div>
-                    <div class="budget-row budget-row--total"><span></span><span>Season total</span><span>$10,000</span></div>
+                    <div>
+                        <h3>CyberLyons</h3>
+                        <p>Our founding team. CyberLyons set the program's standard: build it
+                        yourself, test it until it breaks, and show up ready to compete.</p>
+                    </div>
+                </div>
+                <div class="card card--team">
+                    <div class="plate plate--mini plate--red" role="img" aria-label="Red alliance plate, team 32514">
+                        <span class="plate__num">32514</span>
+                    </div>
+                    <div>
+                        <h3>MechLyons</h3>
+                        <p>Our second team, proof the program is growing. Same shop, same standards,
+                        double the students who get to build, drive, and compete every season.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Outreach</h3>
+                    <p>200+ students reached through six events and three partner schools: our
+                    Science and Engineering Olympics, the Library Open House, Grade 9 Night, and
+                    community workshops across North York. We're building the local STEM pipeline
+                    season by season.</p>
+                </div>
+                <div class="card">
+                    <h3>Competition</h3>
+                    <p>FTC gives students engineering they can hold, run, and break. Across 6+
+                    competitions in our second year, both teams tested months of build work,
+                    strategy, driving, and code against the region's best.</p>
                 </div>
             </div>
         </div>
+    </section>
 
-    </section> <!-- end s-services -->
-
-
-    <!-- season / portfolio
-    ================================================== -->
-    <section id="portfolio" class="s-portfolio">
-
-        <div class="horizontal-line"></div>
-
-        <div class="row s-porfolio__top">
-            <div class="column large-6 w-900-stack">
-                <div class="section-title" data-num="03" data-aos="fade-up">
-                    <h3 class="h6">Season Snapshot</h3>
-                </div>
+    <!-- sponsorship ==================================================== -->
+    <section id="sponsorship" class="section section--alt">
+        <div class="container">
+            <div class="section-head">
+                <h2>What sponsors actually get.</h2>
+                <p class="lede">
+                    We treat sponsorship like a partnership, not a donation. Your brand moves with the
+                    robot, the team, the school, and every event we touch, from a
+                    <strong>1,400-student campus</strong> to community demos across North York.
+                </p>
             </div>
-            <div class="column large-6 w-900-stack">
-                <h1 class="display-1" data-aos="fade-up">
-                    Two active teams. 6+ competitions. A second year running. Here's what our program, outreach, and season look like in action.
-                </h1>
-            </div>
-        </div> <!-- end s-portfolio__top-->
 
-        <div class="row s-portfolio__list block-large-1-2 block-tab-full collapse">
-
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/robot-decode.jpg" title="CyberLyons Robot" data-size="3072x4096">
-                            <img src="images/portfolio/gallery/robot-decode.jpg" 
-                                 srcset="images/portfolio/gallery/robot-decode.jpg 1x, images/portfolio/gallery/robot-decode.jpg 2x" alt="CyberLyons Robot">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">FTC Team #32514</div>
-                        <h4 class="folio-item__title">MechLyons · #32514</h4>
-                    </div>
-                    <a href="https://wlmacrobotics.ca" title="Team Page" class="folio-item__project-link">Team Page</a>
-                    <div class="folio-item__caption">
-                        <p>MechLyons, one of WLMAC Robotics's two competitive FTC teams. 
-                        The team builds, codes, and tests through the full FTC cycle of design reviews, fabrication, programming, strategy, and competition.</p>
-                    </div>
+            <div class="benefits">
+                <div class="benefit">
+                    <h3>Your logo on a competing robot</h3>
+                    <p>Premium placement on a machine that gets photographed, filmed, and
+                    inspected all season, on the field and in the pits.</p>
                 </div>
-            </div> <!-- end column -->
-
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/robot-bench.jpg" title="MechLyons Robot" data-size="3072x4096">
-                            <img src="images/portfolio/gallery/robot-bench.jpg" 
-                                 srcset="images/portfolio/gallery/robot-bench.jpg 1x, images/portfolio/gallery/robot-bench.jpg 2x" alt="MechLyons Robot">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">Display Table</div>
-                        <h4 class="folio-item__title">Display Table</h4>
-                    </div>
-                    <a href="https://wlmacrobotics.ca" title="Team Page" class="folio-item__project-link">Team Page</a>
-                    <div class="folio-item__caption">
-                        <p>MechLyons 32514 at William Lyon Mackenzie CI's course fair, where students see a product of the techniques learned from engineering courses in the school.</p>
-                    </div>
+                <div class="benefit">
+                    <h3>Worn by the team</h3>
+                    <p>Logo on team apparel at every qualifier, demo, and workshop. Hundreds
+                    of students, parents, and engineers see it up close.</p>
                 </div>
-            </div> <!-- end column -->
-
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/club-crawl.jpg" title="Grade 9 Night" data-size="3072x4096">
-                            <img src="images/portfolio/gallery/club-crawl.jpg" 
-                                 srcset="images/portfolio/gallery/club-crawl.jpg 1x, images/portfolio/gallery/club-crawl.jpg 2x" alt="Grade 9 Night">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">Outreach · Event 01</div>
-                        <h4 class="folio-item__title">Grade 9 Night</h4>
-                    </div>
-                    <a href="https://www.instagram.com/wlmac.cyberlyons" title="See More" class="folio-item__project-link">
-                        See More
-                    </a>
-                    <div class="folio-item__caption">
-                        <p>Introduced robotics to incoming Grade 9 students and their families, reaching 100+ future students. The bot seen in this image was a testing prototype of our chassis</p>
-                    </div>
-                </div>
-            </div> <!-- end column -->
-
-            
-
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/outreach-event1.jpg" title="Library Open House" data-size="3072x4080">
-                            <img src="images/portfolio/gallery/outreach-event1.jpg" 
-                                 srcset="images/portfolio/gallery/outreach-event1.jpg 1x, images/portfolio/gallery/outreach-event1.jpg 2x" alt="Library Open House">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">Outreach · Event 02</div>
-                        <h4 class="folio-item__title">Library Open House</h4>
-                    </div>
-                    <a href="https://www.instagram.com/wlmac.cyberlyons" title="See More" class="folio-item__project-link">See More</a>
-                    <div class="folio-item__caption">
-                        <p>A community event where 50+ students built, drove, and programmed real robotics projects. Robotics made tangible for families across middle schools like Dublin Heights, Willowdale, and C.H. Best.</p>
-                    </div>
-                </div>
-            </div> <!-- end column -->
-
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/mseo-classroom.jpg" title="MSEO 2026" data-size="4080x3060">
-                            <img src="images/portfolio/gallery/mseo-classroom.jpg" 
-                                 srcset="images/portfolio/gallery/mseo-classroom.jpg 1x, images/portfolio/gallery/mseo-classroom.jpg 2x" alt="MSEO 2026 Outreach">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">Outreach · Event 03</div>
-                        <h4 class="folio-item__title">Mackenzie Science and Engineering Olympics 2026</h4>
-                    </div>
-                    <a href="https://www.instagram.com/wlmac.cyberlyons" title="See More" class="folio-item__project-link">See More</a>
-                    <div class="folio-item__caption">
-                        <p>The Mackenzie Science and Engineering Olympics brings over 30 middle schools from across Toronto to compete in science and STEM mini-olympics. Over 100 students got their first taste of FTC-style engineering at MSEO 2026.</p>
-                    </div>
-                </div>
-            </div> <!-- end column -->
-
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/nych-yorkdale.jpg" title="NYCH Yorkdale Workshop" data-size="3072x2048">
-                            <img src="images/portfolio/gallery/nych-yorkdale.jpg" 
-                                 srcset="images/portfolio/gallery/nych-yorkdale.jpg 1x, images/portfolio/gallery/nych-yorkdale.jpg 2x" alt="NYCH Yorkdale Workshop">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">Outreach · Event 04</div>
-                        <h4 class="folio-item__title">NYCH Yorkdale Workshop</h4>
-                    </div>
-                    <a href="https://www.instagram.com/wlmac.cyberlyons" title="See More" class="folio-item__project-link">See More</a>
-                    <div class="folio-item__caption">
-                        <p>Partnered with the New York Community House at Yorkdale, this hands-on workshop introduced 60+ students to robotics and engineering. Attendees worked on engineering projects involving arduinos, wiring, and programming to understand how engineering works in real applications like traffic lights and electric motors.</p>
-                    </div>
-                </div>
-            </div> <!-- end column -->
-
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/qualifier.JPG" title="Feb 2026 Qualifier" data-size="3208x1795">
-                            <img src="images/portfolio/gallery/qualifier.JPG" 
-                                 srcset="images/portfolio/gallery/qualifier.JPG 1x, images/portfolio/gallery/qualifier.JPG 2x" alt="Feb 2026 Qualifier Toronto">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">Competition</div>
-                        <h4 class="folio-item__title">Feb 2026 Qualifier · Toronto</h4>
-                    </div>
-                    <a href="https://www.instagram.com/wlmac.cyberlyons" title="See More" class="folio-item__project-link">See More</a>
-                    <div class="folio-item__caption">
-                        <p>Both CyberLyons and MechLyons competed at the February 2026 Toronto qualifier, testing months of build work, strategy, driving, code, and iteration on the field.</p>
-                    </div>
-                </div>
-            </div> <!-- end column -->
-
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/dublinevent.jpg" title="Dublin Heights Event" data-size="2000x1500">
-                            <img src="images/portfolio/gallery/dublinevent.jpg" 
-                                 srcset="images/portfolio/gallery/dublinevent.jpg 1x" alt="Dublin Heights Event">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">Outreach · Event 05</div>
-                        <h4 class="folio-item__title">Dublin Heights Event</h4>
-                    </div>
-                    <a href="https://www.instagram.com/wlmac.cyberlyons" title="See More" class="folio-item__project-link">See More</a>
-                    <div class="folio-item__caption">
-                        <p>An outreach event at Dublin Heights, allowing many elementary school students to have their first taste of engineering and STEM.</p>
-                    </div>
-                </div>
-            </div> <!-- end column -->
-            
-            <div class="column" data-aos="fade-up">
-                <div class="folio-item">
-                    <div class="folio-item__thumb">
-                        <a class="folio-item__thumb-link" href="images/portfolio/gallery/joyce_event.jpg" title="Joyce Event" data-size="5712x4284">
-                            <img src="images/portfolio/gallery/joyce_event.jpg" 
-                                 srcset="images/portfolio/gallery/joyce_event.jpg 1x, images/portfolio/gallery/joyce_event.jpg 2x" alt="Joyce Event">
-                        </a>
-                    </div>
-                    <div class="folio-item__info">
-                        <div class="folio-item__cat">Outreach · Event 06</div>
-                        <h4 class="folio-item__title">Joyce Event</h4>
-                    </div>
-                    <a href="https://www.instagram.com/wlmac.cyberlyons" title="See More" class="folio-item__project-link">See More</a>
-                    <div class="folio-item__caption">
-                        <p>An outreach event bringing hands-on robotics and STEM experiences to local students.</p>
-                    </div>
-                </div>
-            </div> <!-- end column -->
-
-        </div> <!-- folio-list -->
-
-    </section> <!-- end s-portfolio -->
-
-
-    <!-- contact
-    ================================================== -->
-    <section class="s-contact">
-
-        <div class="row narrower s-contact__top h-text-center">
-            <div class="column">
-                <h3 class="h6">Get In Touch</h3>
-                <h1 class="display-1">
-                    Help build something that lasts. Sponsor a robot bumper, supply parts,
-                    mentor a student, or back the whole season. Tell us what you can contribute and we'll match it to the right tier of recognition.
-                </h1>
-            </div>
-        </div> <!-- s-footer__top -->
-
-        <div class="row contact-grid">
-            <div class="column large-6 medium-12">
-                <div class="contact-card contact-card--info">
-                    <div class="contact-card__header">
-                        <h4 class="h3">Need the team?</h4>
-                        <p>We’re happy to discuss sponsorship, build support, and student mentorship opportunities.</p>
-                    </div>
-                    <div class="contact-info">
-                        <p class="contact-info__label">Email</p>
-                        <p class="s-contact__email contact-info__email">
-                            <a href="mailto:hello@wlmacrobotics.ca">hello@wlmacrobotics.ca</a>
-                        </p>
-                        <p class="contact-info__note">
-                            This form uses EmailJS. Once configured with your service ID, template ID, and public key, submissions will be delivered directly to the team inbox.
-                        </p>
-                    </div>
+                <div class="benefit">
+                    <h3>Campus &amp; social reach</h3>
+                    <p>Visibility across a 1,400-student school, three partner schools, and an
+                    Instagram that grows with every build.</p>
                 </div>
             </div>
 
-            <div class="column large-6 medium-12">
-                <div class="contact-card">
-                    <div class="contact-card__header">
-                        <h4 class="h3">Send a message</h4>
-                        <p>Questions about sponsorship, outreach, or team support? Use this form and we’ll get back to you soon.</p>
+            <div class="tiers-head">
+                <h3>Sponsorship tiers</h3>
+            </div>
+
+            <div class="tiers" data-stagger>
+                <div class="tier">
+                    <p class="tier__tag">Tier I</p>
+                    <h3>Cub</h3>
+                    <p class="tier__price">$200 – $499</p>
+                    <ul>
+                        <li>Name on team website and sponsor wall</li>
+                        <li>Recognition in the season recap post</li>
+                        <li>Logo on team apparel and jerseys</li>
+                        <li>Your name in season videos and social posts</li>
+                    </ul>
+                    <a class="tier__cta" href="#contact" data-interest="1">Start with Cub →</a>
+                </div>
+                <div class="tier">
+                    <p class="tier__tag">Tier II</p>
+                    <h3>Challenger</h3>
+                    <p class="tier__price">$500 – $1,499</p>
+                    <p class="tier__intro">Everything in Cub, plus:</p>
+                    <ul>
+                        <li>Logo on pit display and printed materials</li>
+                        <li>A dedicated social media post</li>
+                        <li>End-of-season impact report</li>
+                    </ul>
+                    <a class="tier__cta" href="#contact" data-interest="2">Choose Challenger →</a>
+                </div>
+                <div class="tier tier--flagship">
+                    <p class="tier__flag">Flagship</p>
+                    <p class="tier__tag">Tier III</p>
+                    <h3>Lyon Champion</h3>
+                    <p class="tier__price">$1,500+</p>
+                    <p class="tier__intro">Everything in Challenger, plus:</p>
+                    <ul>
+                        <li>Prominent logo on a competing robot</li>
+                        <li>Sponsor showcase invite</li>
+                        <li>Live robot demo at your site</li>
+                    </ul>
+                    <a class="tier__cta" href="#contact" data-interest="3">Become a Lyon Champion →</a>
+                </div>
+            </div>
+
+            <p class="tiers-note">
+                No corporate logo has ever been on these robots — the founding-partner spots are
+                still open. Every tier includes all lower-tier benefits, and every partner gets a
+                direct line to the team. <strong>In-kind counts:</strong> donated parts, tools,
+                machine time, or services offset the cash lines below at equal value.
+            </p>
+
+            <div id="budget" class="budget-grid">
+                <div class="side">
+                    <h3>Where the money goes.</h3>
+                    <p>
+                        Our season runs roughly <strong style="color:var(--paper)">$10,000 CAD</strong> across
+                        CyberLyons and MechLyons. Here's the whole thing, every line of it. Donated
+                        tools, parts, or services reduce required cash. Additional funding means more
+                        qualifiers attended.
+                    </p>
+                </div>
+
+                <div class="budget" data-stagger role="table" aria-label="Season budget, in Canadian dollars">
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Reg.</span>
+                        <span class="budget__item" role="cell">FTC team registration · 2 teams
+                            <span class="bar" aria-hidden="true"><i style="width:19%"></i></span></span>
+                        <span class="budget__amt" role="cell">$600</span>
                     </div>
-                    <form id="contactForm" class="contact-form" novalidate>
-                        <div class="row contact-form__row">
-                            <div class="column large-12">
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Reg.</span>
+                        <span class="budget__item" role="cell">Qualifier &amp; event entry fees
+                            <span class="bar" aria-hidden="true"><i style="width:31%"></i></span></span>
+                        <span class="budget__amt" role="cell">$1,000</span>
+                    </div>
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Build</span>
+                        <span class="budget__item" role="cell">Robot parts &amp; hardware · 2 robots
+                            <span class="bar" aria-hidden="true"><i style="width:100%"></i></span></span>
+                        <span class="budget__amt" role="cell">$3,200</span>
+                    </div>
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Build</span>
+                        <span class="budget__item" role="cell">Control system &amp; electronics
+                            <span class="bar" aria-hidden="true"><i style="width:44%"></i></span></span>
+                        <span class="budget__amt" role="cell">$1,400</span>
+                    </div>
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Build</span>
+                        <span class="budget__item" role="cell">Fabrication &amp; prototyping materials
+                            <span class="bar" aria-hidden="true"><i style="width:38%"></i></span></span>
+                        <span class="budget__amt" role="cell">$1,200</span>
+                    </div>
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Build</span>
+                        <span class="budget__item" role="cell">Tools &amp; build-space supplies
+                            <span class="bar" aria-hidden="true"><i style="width:19%"></i></span></span>
+                        <span class="budget__amt" role="cell">$600</span>
+                    </div>
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Brand</span>
+                        <span class="budget__item" role="cell">Team apparel &amp; sponsor branding
+                            <span class="bar" aria-hidden="true"><i style="width:25%"></i></span></span>
+                        <span class="budget__amt" role="cell">$800</span>
+                    </div>
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Brand</span>
+                        <span class="budget__item" role="cell">Pit display &amp; presentation
+                            <span class="bar" aria-hidden="true"><i style="width:13%"></i></span></span>
+                        <span class="budget__amt" role="cell">$400</span>
+                    </div>
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Reach</span>
+                        <span class="budget__item" role="cell">Outreach &amp; demo supplies
+                            <span class="bar" aria-hidden="true"><i style="width:13%"></i></span></span>
+                        <span class="budget__amt" role="cell">$400</span>
+                    </div>
+                    <div class="budget__row" role="row">
+                        <span class="budget__cat" role="cell">Comp.</span>
+                        <span class="budget__item" role="cell">Travel &amp; competition days
+                            <span class="bar" aria-hidden="true"><i style="width:13%"></i></span></span>
+                        <span class="budget__amt" role="cell">$400</span>
+                    </div>
+                    <div class="budget__row budget__row--total" role="row">
+                        <span class="budget__cat" role="cell"></span>
+                        <span class="budget__item" role="cell">Season total</span>
+                        <span class="budget__amt" role="cell">$10,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- season ========================================================= -->
+    <section id="season" class="section">
+        <div class="container">
+            <div class="section-head">
+                <h2>Two teams. Six events. A second year running.</h2>
+                <p class="lede">
+                    Here's what the program, the outreach, and the season look like in action.
+                    Every photo below is our own students, robots, and events.
+                </p>
+            </div>
+
+            <div class="gallery gallery--collapsed" data-stagger>
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="competition" aria-label="View photos from the February 2026 Toronto qualifier">
+                        <img src="images/portfolio/gallery/qualifier.jpg" width="1000" height="562" alt="MechLyons robot 32514 mid-match on the competition field at the Toronto qualifier" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Competition</span>
+                        <strong class="shot__title">February 2026 Qualifier · Toronto</strong>
+                        <p class="shot__note">Both teams brought robots to the field, putting a season of shop work under real match pressure.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="competition" aria-label="View competition photos">
+                        <img src="images/portfolio/gallery/robot-decode.jpg" width="1000" height="1333" alt="MechLyons robot 32514 lined up at the red goal during a DECODE season match" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Competition</span>
+                        <strong class="shot__title">MechLyons at the goal</strong>
+                        <p class="shot__note">#32514 ready for DECODE, the 2025-2026 FTC season game.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="course-fair" aria-label="View photos from the course fair display">
+                        <img src="images/portfolio/gallery/robot-bench.jpg" width="1000" height="1333" alt="A WLMAC robot on the display table at the school course fair" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">On campus</span>
+                        <strong class="shot__title">Course fair display</strong>
+                        <p class="shot__note">Where 1,400 students see what the school's engineering courses can build.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="grade9" aria-label="View photos from Grade 9 Night">
+                        <img src="images/portfolio/gallery/club-crawl.jpg" width="1000" height="1333" alt="Students and families around the robotics table at Grade 9 Night" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Outreach</span>
+                        <strong class="shot__title">Grade 9 Night</strong>
+                        <p class="shot__note">Introduced robotics to 100+ incoming students and their families with a driving prototype.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="library" aria-label="View photos from the Library Open House">
+                        <img src="images/portfolio/gallery/outreach-event1.jpg" width="1000" height="1328" alt="Students building and driving robots at the Library Open House" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Outreach</span>
+                        <strong class="shot__title">Library Open House</strong>
+                        <p class="shot__note">50+ students built, drove, and programmed real robotics projects, with families from Dublin Heights, Willowdale, and C.H. Best.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="mseo" aria-label="View photos from the Science and Engineering Olympics">
+                        <img src="images/portfolio/gallery/mseo-classroom.jpg" width="1000" height="750" alt="A classroom of middle school students at the Mackenzie Science and Engineering Olympics" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Outreach</span>
+                        <strong class="shot__title">Science &amp; Engineering Olympics 2026</strong>
+                        <p class="shot__note">Our school's olympics (MSEO) drew 30+ middle schools from across Toronto. Over 100 students got their first taste of FTC-style engineering.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="nych" aria-label="View photos from the NYCH Yorkdale workshop">
+                        <img src="images/portfolio/gallery/nych-yorkdale.jpg" width="1000" height="750" alt="Students wiring Arduino projects at the NYCH Yorkdale workshop" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Outreach</span>
+                        <strong class="shot__title">NYCH Yorkdale workshop</strong>
+                        <p class="shot__note">60+ students built Arduino projects: wiring, programming, and real applications like traffic lights and motors.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="dublin" aria-label="View photos from the Dublin Heights event">
+                        <img src="images/portfolio/gallery/dublinevent.jpg" width="1000" height="750" alt="Elementary school students trying robotics at the Dublin Heights event" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Outreach</span>
+                        <strong class="shot__title">Dublin Heights</strong>
+                        <p class="shot__note">Elementary students getting their first hands-on taste of engineering and STEM.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="joyce" aria-label="View photos from the Joyce community event">
+                        <img src="images/portfolio/gallery/joyce_event.jpg" width="1000" height="750" alt="Students working with robots at the Joyce community event" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Outreach</span>
+                        <strong class="shot__title">Joyce event</strong>
+                        <p class="shot__note">Hands-on robotics and STEM experiences brought to local students.</p>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="gallery-foot">
+                <button type="button" class="btn btn--ghost gallery-more">Show all 9 photos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact ======================================================== -->
+    <section id="contact" class="section section--alt">
+        <div class="container">
+            <div class="section-head">
+                <h2>Help build something that lasts.</h2>
+                <p class="lede">
+                    Sponsor a tier, supply parts, mentor a student, or back the whole season.
+                    Tell us what you can contribute and we'll match it to the right recognition.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 style="margin-top:0">Prefer email?</h3>
+                    <a class="email-line" href="mailto:hello@wlmacrobotics.ca?subject=Sponsorship%20inquiry">hello@wlmacrobotics.ca</a>
+
+                    <h3>What happens next</h3>
+                    <ol class="steps">
+                        <li>We reply within a few days with a season overview.</li>
+                        <li>You pick a tier, or an in-kind contribution of parts, tools, or time.</li>
+                        <li>Your logo is on the robot, the jerseys, and the wall before the first qualifier.</li>
+                    </ol>
+
+                    <h3>How payment works</h3>
+                    <p class="contact-note">Cheque or e-transfer, whichever suits you, and we put
+                    every agreement in writing before anything is due. In-kind parts, tools, and
+                    services count at equal value.</p>
+
+                    <h3>Find us</h3>
+                    <address>
+                        William Lyon Mackenzie CI<br>
+                        North York, Ontario, Canada<br>
+                        <a href="https://www.instagram.com/wlmac.cyberlyons">Instagram · @wlmac.cyberlyons</a><br>
+                        <a href="https://wlmacrobotics.ca">wlmacrobotics.ca</a>
+                    </address>
+                </div>
+
+                <div class="contact-form-card">
+                    <h3>Send a message</h3>
+                    <p>Questions about sponsorship, outreach, or team support? The form goes straight to the team inbox.</p>
+
+                    <form id="contactForm" novalidate>
+                        <div class="field-row">
+                            <div class="field">
                                 <label for="contactName">Name</label>
-                                <input id="contactName" class="h-full-width" type="text" name="name" placeholder="Your name" required>
+                                <input id="contactName" type="text" name="name" autocomplete="name" placeholder="Your name" required>
                             </div>
-                            <div class="column large-12">
+                            <div class="field">
                                 <label for="contactEmail">Email</label>
-                                <input id="contactEmail" class="h-full-width" type="email" name="email" placeholder="Your email" required>
+                                <input id="contactEmail" type="email" name="email" autocomplete="email" placeholder="you@company.com" required>
                             </div>
                         </div>
-                        <div class="row contact-form__row">
-                            <div class="column large-12">
-                                <label for="contactMessage">Message</label>
-                                <textarea id="contactMessage" class="h-full-width" name="message" placeholder="Tell us what you're interested in..." rows="6" required></textarea>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="contactOrg">Organization <small>· optional</small></label>
+                                <input id="contactOrg" type="text" name="organization" autocomplete="organization" placeholder="Company or group">
+                            </div>
+                            <div class="field">
+                                <label for="contactInterest">I'm interested in</label>
+                                <select id="contactInterest" name="interest">
+                                    <option value="" selected>Choose one…</option>
+                                    <option>Tier I · Cub ($200–$499)</option>
+                                    <option>Tier II · Challenger ($500–$1,499)</option>
+                                    <option>Tier III · Lyon Champion ($1,500+)</option>
+                                    <option>Parts, tools, or services (in-kind)</option>
+                                    <option>Mentorship or expertise</option>
+                                    <option>Something else</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="contact-form__actions">
-                            <button type="submit" class="btn btn--primary h-full-width">Send Message</button>
+                        <div class="field">
+                            <label for="contactMessage">Message <small>· optional if you've picked an interest</small></label>
+                            <textarea id="contactMessage" name="message" placeholder="Tell us what you have in mind…" rows="6" maxlength="4000"></textarea>
                         </div>
-                        <p id="contactFormStatus" class="contact-form__status" aria-live="polite"></p>
+
+                        <!-- honeypot: real people never see or fill this -->
+                        <div class="hp-field" aria-hidden="true">
+                            <label for="contactGotcha">Leave this field empty</label>
+                            <input id="contactGotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <button type="submit" class="btn btn--gold" style="width:100%">Send message</button>
+                        <p id="contactFormStatus" class="form-status" role="status" aria-live="polite"></p>
                     </form>
                 </div>
             </div>
         </div>
+    </section>
 
-    </section>  <!-- end s-contact -->
+    </main>
 
+    <!-- event lightbox ================================================= -->
+    <dialog class="lightbox" id="eventLightbox" aria-label="Event photo gallery">
+        <div class="lightbox__inner">
+            <div class="lightbox__head">
+                <p class="lightbox__heading">
+                    <span class="lightbox__title"></span>
+                    <span class="lightbox__count" aria-live="polite"></span>
+                </p>
+                <button type="button" class="lightbox__close" aria-label="Close photo gallery">✕</button>
+            </div>
+            <div class="lightbox__stage">
+                <div class="lightbox__track" aria-label="Event photos"></div>
+                <button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous photo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next photo">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+            <p class="lightbox__note"></p>
+            <div class="lightbox__timer" aria-hidden="true"><i></i></div>
+        </div>
+    </dialog>
 
-    <!-- footer
-    ================================================== -->
-    <footer class="s-footer">
-        <div class="row row-y-top">
-
-            <div class="column large-8 medium-12">
-                <div class="row">
-                    <div class="column large-7 tab-12 s-footer__block">
-                        <h4 class="h6">Where to Find Us</h4>
-        
-                        <p>
-                        William Lyon Mackenzie CI<br>
-                        North York, Ontario<br>
-                        Canada<br>
-                        <a href="https://wlmacrobotics.ca">wlmacrobotics.ca</a>
-                        </p>
-                    </div>
-        
-                    <div class="column large-5 tab-12 s-footer__block">
-                        <h4 class="h6">Follow Us</h4>
-        
-                        <ul class="s-footer__list">
-                            <li><a href="https://www.instagram.com/wlmac.cyberlyons">Instagram - @wlmac.cyberlyons</a></li>
-                            <li><a href="https://wlmacrobotics.ca">Website - wlmacrobotics.ca</a></li>
-                        </ul>
-                    </div>
+    <!-- footer ========================================================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a class="brand" href="#top" aria-label="WLMAC Robotics — back to top">
+                        <img src="images/logo.svg" alt="WLMAC">
+                        <span>ROBOTICS</span>
+                    </a>
+                    <p class="footer-blurb">
+                        The student-run FIRST Tech Challenge program at William Lyon Mackenzie CI.
+                        CyberLyons #27964 and MechLyons #32514, building a robotics culture in
+                        North York one season at a time.
+                    </p>
+                </div>
+                <div>
+                    <h4>Follow</h4>
+                    <ul>
+                        <li><a href="https://www.instagram.com/wlmac.cyberlyons">Instagram</a></li>
+                        <li><a href="https://wlmacrobotics.ca">wlmacrobotics.ca</a></li>
+                        <li><a href="mailto:hello@wlmacrobotics.ca?subject=Sponsorship%20inquiry">hello@wlmacrobotics.ca</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Sponsor</h4>
+                    <ul>
+                        <li><a href="#sponsorship">Tiers &amp; benefits</a></li>
+                        <li><a href="#budget">Season budget</a></li>
+                        <li><a href="#contact">Become a partner</a></li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="column large-4 medium-12 s-footer__block--end">
-                <a href="mailto:hello@wlmacrobotics.ca" class="btn h-full-width">Become a Partner</a>
-
-                <div class="ss-copyright">
-                    <span>WLMAC Robotics · Season 2026/27</span>
-                    <span>CyberLyons &amp; MechLyons · North York, ON</span>
-                </div>
+            <div class="footer-bottom">
+                <span>WLMAC Robotics · Season 2026/27</span>
+                <a href="#top">Back to top ↑</a>
             </div>
-
-            <div class="ss-go-top">
-                <a class="smoothscroll" title="Back to Top" href="#top">
-                    top
-                </a>
-            </div> <!-- end ss-go-top -->
-
         </div>
     </footer>
-    
 
-    <!-- photoswipe background
-    ================================================== -->
-    <div aria-hidden="true" class="pswp" role="dialog" tabindex="-1">
+    <!-- scripts ======================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+    (function () {
+        'use strict';
 
-        <div class="pswp__bg"></div>
-        <div class="pswp__scroll-wrap">
+        /* Header state ------------------------------------------------- */
+        var header = document.querySelector('.site-header');
+        var onScroll = function () {
+            header.classList.toggle('is-scrolled', window.scrollY > 10);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-            <div class="pswp__container">
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-                <div class="pswp__item"></div>
-            </div>
+        /* Mobile menu ---------------------------------------------------- */
+        var toggle = document.querySelector('.menu-toggle');
+        var setMenu = function (open) {
+            header.classList.toggle('is-open', open);
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            toggle.textContent = open ? 'Close' : 'Menu';
+        };
+        toggle.addEventListener('click', function () {
+            setMenu(!header.classList.contains('is-open'));
+        });
+        document.querySelectorAll('.site-nav a').forEach(function (link) {
+            link.addEventListener('click', function () { setMenu(false); });
+        });
 
-            <div class="pswp__ui pswp__ui--hidden">
-                <div class="pswp__top-bar">
-                    <div class="pswp__counter"></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button> <button class="pswp__button pswp__button--share" title=
-                    "Share"></button> <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> <button class="pswp__button pswp__button--zoom" title=
-                    "Zoom in/out"></button>
-                    <div class="pswp__preloader">
-                        <div class="pswp__preloader__icn">
-                            <div class="pswp__preloader__cut">
-                                <div class="pswp__preloader__donut"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                    <div class="pswp__share-tooltip"></div>
-                </div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button> <button class="pswp__button pswp__button--arrow--right" title=
-                "Next (arrow right)"></button>
-                <div class="pswp__caption">
-                    <div class="pswp__caption__center"></div>
-                </div>
-            </div>
+        /* Active section in nav ------------------------------------------ */
+        var navLinks = Array.prototype.slice.call(document.querySelectorAll('.site-nav a[href^="#"]'));
+        var spySections = [];
+        var linkFor = {};
+        navLinks.forEach(function (link) {
+            var id = link.getAttribute('href').slice(1);
+            var el = document.getElementById(id);
+            if (el) {
+                linkFor[id] = link;
+                spySections.push({ id: id, el: el });
+            }
+        });
+        var updateCurrentSection = function () {
+            var marker = window.scrollY + window.innerHeight * 0.42;
+            var currentId = null;
+            spySections.forEach(function (s) {
+                if (s.el.offsetTop <= marker) currentId = s.id;
+            });
+            navLinks.forEach(function (l) { l.removeAttribute('aria-current'); });
+            if (currentId) linkFor[currentId].setAttribute('aria-current', 'true');
+        };
+        window.addEventListener('scroll', updateCurrentSection, { passive: true });
+        updateCurrentSection();
 
-        </div>
+        /* Tier links prefill the interest field ---------------------------- */
+        document.querySelectorAll('.tier__cta').forEach(function (link) {
+            link.addEventListener('click', function () {
+                var index = parseInt(link.getAttribute('data-interest'), 10);
+                var select = document.getElementById('contactInterest');
+                if (select && index > 0 && index < select.options.length) {
+                    select.selectedIndex = index;
+                }
+            });
+        });
 
-    </div> <!-- end photoSwipe background -->
+        /* Season gallery: show all photos on small screens ----------------- */
+        var gallery = document.querySelector('.gallery');
+        var galleryMore = document.querySelector('.gallery-more');
+        if (gallery && galleryMore) {
+            galleryMore.addEventListener('click', function () {
+                gallery.classList.remove('gallery--collapsed');
+            });
+        }
 
+        /* Event lightbox ---------------------------------------------------
+           To add photos to an event, drop the file in images/ and add a
+           line to its array below: { src, alt, w, h }. */
+        var EVENT_PHOTOS = {
+            competition: [
+                { src: 'images/portfolio/gallery/qualifier.jpg', alt: 'MechLyons robot 32514 mid-match on the competition field', w: 1000, h: 562 },
+                { src: 'images/hero-bg.jpg', alt: 'Both WLMAC robots staged together on the competition field', w: 1920, h: 1446 },
+                { src: 'images/portfolio/gallery/robot-decode.jpg', alt: 'MechLyons robot 32514 lined up at the goal during a DECODE match', w: 1000, h: 1333 },
+                { src: 'images/about-photo.jpg', alt: 'The full WLMAC Robotics roster with both robots at the February 2026 qualifier', w: 1400, h: 781 }
+            ],
+            'course-fair': [
+                { src: 'images/portfolio/gallery/robot-bench.jpg', alt: 'A WLMAC robot on the display table at the school course fair', w: 1000, h: 1333 }
+            ],
+            grade9: [
+                { src: 'images/portfolio/gallery/club-crawl.jpg', alt: 'Students and families around the robotics table at Grade 9 Night', w: 1000, h: 1333 }
+            ],
+            library: [
+                { src: 'images/portfolio/gallery/outreach-event1.jpg', alt: 'Students building and driving robots at the Library Open House', w: 1000, h: 1328 }
+            ],
+            mseo: [
+                { src: 'images/portfolio/gallery/mseo-classroom.jpg', alt: 'A classroom of middle school students at the Science and Engineering Olympics', w: 1000, h: 750 }
+            ],
+            nych: [
+                { src: 'images/portfolio/gallery/nych-yorkdale.jpg', alt: 'Students wiring Arduino projects at the NYCH Yorkdale workshop', w: 1000, h: 750 }
+            ],
+            dublin: [
+                { src: 'images/portfolio/gallery/dublinevent.jpg', alt: 'Elementary school students trying robotics at the Dublin Heights event', w: 1000, h: 750 }
+            ],
+            joyce: [
+                { src: 'images/portfolio/gallery/joyce_event.jpg', alt: 'Students working with robots at the Joyce community event', w: 1000, h: 750 }
+            ]
+        };
 
-    <!-- Java Script
-    ================================================== -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+        var lightbox = document.getElementById('eventLightbox');
+        if (lightbox && typeof lightbox.showModal === 'function') {
+            var lbTrack = lightbox.querySelector('.lightbox__track');
+            var lbTitle = lightbox.querySelector('.lightbox__title');
+            var lbCount = lightbox.querySelector('.lightbox__count');
+            var lbNote = lightbox.querySelector('.lightbox__note');
+            var lbTimer = lightbox.querySelector('.lightbox__timer');
+            var lbReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+            var lbCurrent = 0;
+            var lbTotal = 0;
+            var lbInterval = null;
+            var lbScrollDebounce = null;
+            var lbOpener = null;
+
+            var lbGoTo = function (index, instant) {
+                if (!lbTotal) return;
+                lbCurrent = ((index % lbTotal) + lbTotal) % lbTotal;
+                lbTrack.scrollTo({
+                    left: lbCurrent * lbTrack.clientWidth,
+                    behavior: (instant || lbReduce.matches) ? 'auto' : 'smooth'
+                });
+                lbCount.textContent = (lbCurrent + 1) + ' / ' + lbTotal;
+            };
+
+            var lbStopAuto = function () {
+                clearInterval(lbInterval);
+                lbInterval = null;
+                lbTimer.classList.remove('is-running');
+            };
+
+            /* Auto-advance every 4s; any manual move restarts the clock */
+            var lbStartAuto = function () {
+                lbStopAuto();
+                if (lbTotal < 2 || lbReduce.matches) return;
+                void lbTimer.offsetWidth; /* restart the bar animation */
+                lbTimer.classList.add('is-running');
+                lbInterval = setInterval(function () {
+                    lbGoTo(lbCurrent + 1);
+                }, 4000);
+            };
+
+            var lbOpen = function (opener) {
+                var photos = EVENT_PHOTOS[opener.getAttribute('data-event')];
+                if (!photos || !photos.length) return;
+                lbOpener = opener;
+                var shot = opener.closest('.shot');
+                lbTitle.textContent = shot ? shot.querySelector('.shot__title').textContent : '';
+                lbNote.textContent = shot ? shot.querySelector('.shot__note').textContent : '';
+                lbTrack.innerHTML = '';
+                photos.forEach(function (photo, i) {
+                    var slide = document.createElement('div');
+                    slide.className = 'lightbox__slide';
+                    var img = document.createElement('img');
+                    img.src = photo.src;
+                    img.alt = photo.alt;
+                    img.width = photo.w;
+                    img.height = photo.h;
+                    if (i > 0) img.loading = 'lazy';
+                    slide.appendChild(img);
+                    lbTrack.appendChild(slide);
+                });
+                lbTotal = photos.length;
+                lightbox.classList.toggle('lightbox--single', lbTotal < 2);
+                lightbox.showModal();
+                lbGoTo(0, true);
+                lbStartAuto();
+            };
+
+            document.querySelectorAll('.shot__frame[data-event]').forEach(function (frame) {
+                frame.addEventListener('click', function () { lbOpen(frame); });
+            });
+
+            lightbox.querySelector('.lightbox__nav--prev').addEventListener('click', function () {
+                lbGoTo(lbCurrent - 1);
+                lbStartAuto();
+            });
+            lightbox.querySelector('.lightbox__nav--next').addEventListener('click', function () {
+                lbGoTo(lbCurrent + 1);
+                lbStartAuto();
+            });
+            lightbox.querySelector('.lightbox__close').addEventListener('click', function () {
+                lightbox.close();
+            });
+            lightbox.addEventListener('keydown', function (event) {
+                if (event.key === 'ArrowLeft') { lbGoTo(lbCurrent - 1); lbStartAuto(); }
+                if (event.key === 'ArrowRight') { lbGoTo(lbCurrent + 1); lbStartAuto(); }
+            });
+            /* Click on the backdrop closes */
+            lightbox.addEventListener('click', function (event) {
+                if (event.target === lightbox) lightbox.close();
+            });
+            lightbox.addEventListener('close', function () {
+                lbStopAuto();
+                lbTrack.innerHTML = '';
+                if (lbOpener) { lbOpener.focus(); lbOpener = null; }
+            });
+            /* Courtesy pause while the pointer rests on the photos */
+            lbTrack.addEventListener('pointerenter', lbStopAuto);
+            lbTrack.addEventListener('pointerleave', function () {
+                if (lightbox.open) lbStartAuto();
+            });
+            /* Touch swipes: keep the counter in sync and reset the clock */
+            lbTrack.addEventListener('scroll', function () {
+                clearTimeout(lbScrollDebounce);
+                lbScrollDebounce = setTimeout(function () {
+                    var index = Math.round(lbTrack.scrollLeft / lbTrack.clientWidth);
+                    if (index !== lbCurrent && index >= 0 && index < lbTotal) {
+                        lbCurrent = index;
+                        lbCount.textContent = (lbCurrent + 1) + ' / ' + lbTotal;
+                        if (lightbox.open && !lbInterval) return;
+                        if (lightbox.open) lbStartAuto();
+                    }
+                }, 120);
+            }, { passive: true });
+            window.addEventListener('resize', function () {
+                if (lightbox.open) lbGoTo(lbCurrent, true);
+            });
+        }
+
+        /* Beacon: partner CTAs light up the form they land on -------------- */
+        var formCard = document.querySelector('.contact-form-card');
+        if (formCard) {
+            document.querySelectorAll('a[href="#contact"]').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    setTimeout(function () {
+                        formCard.classList.remove('is-beckoned');
+                        void formCard.offsetWidth; /* restart the animation */
+                        formCard.classList.add('is-beckoned');
+                    }, 650);
+                });
+            });
+        }
+
+        /* Alliance-color burst for the sent message ------------------------ */
+        var celebrate = function (origin) {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var colors = ['#F0B44C', '#1D5FC2', '#CE3038', '#EDF2F7'];
+            var rect = origin.getBoundingClientRect();
+            var cx = rect.left + rect.width / 2;
+            var cy = rect.top + rect.height / 2;
+            for (var i = 0; i < 14; i++) {
+                var bit = document.createElement('span');
+                bit.className = 'confetti-bit';
+                bit.style.left = cx + 'px';
+                bit.style.top = cy + 'px';
+                bit.style.background = colors[i % colors.length];
+                var angle = (Math.PI * 2 * i) / 14 + (Math.random() - 0.5) * 0.6;
+                var dist = 55 + Math.random() * 55;
+                bit.style.setProperty('--dx', (Math.cos(angle) * dist) + 'px');
+                bit.style.setProperty('--dy', (Math.sin(angle) * dist - 40) + 'px');
+                bit.style.setProperty('--rot', (Math.random() * 540 - 270) + 'deg');
+                document.body.appendChild(bit);
+                bit.addEventListener('animationend', function (e) { e.target.remove(); });
+            }
+        };
+
+        /* Staggered group reveals ----------------------------------------- */
+        /* Content is visible without this; adding .is-visible only plays
+           the entrance animation. No IntersectionObserver, no problem. */
+        var staggerGroups = document.querySelectorAll('[data-stagger]');
+        staggerGroups.forEach(function (group) {
+            Array.prototype.forEach.call(group.children, function (child, i) {
+                child.style.setProperty('--i', i);
+            });
+        });
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -30px' });
+            staggerGroups.forEach(function (el) { io.observe(el); });
+        }
+
+        /* EmailJS contact form ------------------------------------------- */
+        var EMAILJS_SERVICE_ID = 'service_15ofg9r';
+        var EMAILJS_TEMPLATE_ID = 'template_5dxi081';
+        var EMAILJS_PUBLIC_KEY = 'Ql9fdB8-80sRNy095';
+
+        if (typeof emailjs !== 'undefined') {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        }
+
+        var form = document.getElementById('contactForm');
+        var status = document.getElementById('contactFormStatus');
+
+        if (form && status) {
+            var fields = {
+                name: document.getElementById('contactName'),
+                email: document.getElementById('contactEmail'),
+                org: document.getElementById('contactOrg'),
+                interest: document.getElementById('contactInterest'),
+                message: document.getElementById('contactMessage')
+            };
+
+            var setStatus = function (kind, text) {
+                status.className = 'form-status' + (kind ? ' form-status--' + kind : '');
+                status.textContent = text;
+            };
+
+            var markInvalid = function (field, text) {
+                field.setAttribute('aria-invalid', 'true');
+                setStatus('err', text);
+                field.focus();
+            };
+
+            Object.keys(fields).forEach(function (key) {
+                fields[key].addEventListener('input', function () {
+                    fields[key].removeAttribute('aria-invalid');
+                });
+            });
+
+            /* Attached unconditionally, preventDefault first: even if the
+               EmailJS CDN never loaded, submitting must not reload the page
+               and destroy the sponsor's message. */
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                /* Honeypot: bots fill it, people can't see it */
+                if (document.getElementById('contactGotcha').value) {
+                    setStatus('ok', 'Message sent. We’ll get back to you within a few days.');
+                    form.reset();
+                    return;
+                }
+
+                var name = fields.name.value.trim();
+                var email = fields.email.value.trim();
+                var org = fields.org.value.trim();
+                var interest = fields.interest.value;
+                var message = fields.message.value.trim();
+
+                if (!name) {
+                    return markInvalid(fields.name, 'Add your name so we know who to reply to.');
+                }
+                if (!email || !fields.email.checkValidity()) {
+                    return markInvalid(fields.email, 'That email doesn’t look right. Check it so we can reply.');
+                }
+                if (!message && !interest) {
+                    return markInvalid(fields.message, 'Pick an interest above or add a short message.');
+                }
+
+                if (typeof emailjs === 'undefined') {
+                    setStatus('err', 'The form couldn’t load on this network. Email us directly at hello@wlmacrobotics.ca (your message is safe in the box below).');
+                    return;
+                }
+
+                /* Fold the extra fields into the message so nothing is lost,
+                   whatever the EmailJS template renders. */
+                var details = [];
+                if (org) details.push('Organization: ' + org);
+                if (interest) details.push('Interested in: ' + interest);
+                var fullMessage = (details.length ? details.join('\n') + '\n\n' : '')
+                    + (message || '(No message. See interest above.)');
+
+                var params = {
+                    name: name,
+                    email: email,
+                    organization: org,
+                    interest: interest,
+                    message: fullMessage
+                };
+
+                var btn = form.querySelector('button[type="submit"]');
+                clearTimeout(form._sentTimer);
+                btn.disabled = true;
+                btn.textContent = 'Sending…';
+                setStatus('', '');
+
+                emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
+                    .then(function () {
+                        status.className = 'form-status form-status--ok';
+                        status.innerHTML = '<svg class="status-check" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 12.5 L10 18.5 L20 6.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+                        status.appendChild(document.createTextNode(
+                            'Message sent. We’ll reply to ' + email + ' within a few days.'));
+                        celebrate(btn);
+                        form.reset();
+                        btn.disabled = false;
+                        btn.textContent = 'Sent ✓';
+                        form._sentTimer = setTimeout(function () { btn.textContent = 'Send message'; }, 4000);
+                    }, function (error) {
+                        setStatus('err', 'Couldn’t send. Email us directly at hello@wlmacrobotics.ca; your message is still here.');
+                        btn.disabled = false;
+                        btn.textContent = 'Send message';
+                        if (window.console) console.error('EmailJS error:', error);
+                    });
+            });
+        }
+    })();
+    </script>
 
 </body>
-
 </html>
