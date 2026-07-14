@@ -1,0 +1,5 @@
+# Agent / tooling directories
+.agents/
+.claude/
+.codex/
+.impeccable/
