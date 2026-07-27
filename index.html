@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <!-- Locks which origins the page may load code from / talk to.
+         If you add a new third-party script, font, or API, add its
+         origin here too or the browser will silently block it. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/releases/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.emailjs.com; frame-src https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
     <title>WLMAC Robotics — FTC Sponsorship · Season 2026/27</title>
     <meta name="description" content="Two FTC teams. One school. A growing robotics culture in North York built by students, backed by partners who see it early.">
     <meta name="author" content="WLMAC Robotics">
@@ -1025,6 +1029,12 @@
 
         .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
+        /* The reCAPTCHA widget is a fixed 304px; shrink it a touch on
+           the narrowest phones so it doesn't overflow the card */
+        @media (max-width: 375px) {
+            .field--captcha .g-recaptcha { transform: scale(0.87); transform-origin: 0 0; }
+        }
+
         .form-status {
             margin: 14px 0 0;
             font-size: 0.92rem;
@@ -1641,17 +1651,17 @@
                         <div class="field-row">
                             <div class="field">
                                 <label for="contactName">Name</label>
-                                <input id="contactName" type="text" name="name" autocomplete="name" placeholder="Your name" required>
+                                <input id="contactName" type="text" name="name" autocomplete="name" placeholder="Your name" maxlength="100" required>
                             </div>
                             <div class="field">
                                 <label for="contactEmail">Email</label>
-                                <input id="contactEmail" type="email" name="email" autocomplete="email" placeholder="you@company.com" required>
+                                <input id="contactEmail" type="email" name="email" autocomplete="email" placeholder="you@company.com" maxlength="254" required>
                             </div>
                         </div>
                         <div class="field-row">
                             <div class="field">
                                 <label for="contactOrg">Organization <small>· optional</small></label>
-                                <input id="contactOrg" type="text" name="organization" autocomplete="organization" placeholder="Company or group">
+                                <input id="contactOrg" type="text" name="organization" autocomplete="organization" placeholder="Company or group" maxlength="150">
                             </div>
                             <div class="field">
                                 <label for="contactInterest">I'm interested in</label>
@@ -1675,6 +1685,13 @@
                         <div class="hp-field" aria-hidden="true">
                             <label for="contactGotcha">Leave this field empty</label>
                             <input id="contactGotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- reCAPTCHA: EmailJS refuses to send without a solved token,
+                             so this widget is required, not decorative. The site key is
+                             public by design (the secret lives in the EmailJS dashboard). -->
+                        <div class="field field--captcha">
+                            <div class="g-recaptcha" data-sitekey="6LdKO2gtAAAAAEJ7WHY9w_Sx7Phd7VflTkFUICBG" data-theme="dark"></div>
                         </div>
 
                         <button type="submit" class="btn btn--gold" style="width:100%">Send message</button>
@@ -1751,7 +1768,16 @@
     </footer>
 
     <!-- scripts ======================================================== -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Pinned to an exact version with an integrity hash: if the CDN or
+         package is ever tampered with, the browser refuses to run it.
+         To upgrade: bump the version AND regenerate the hash together
+         (https://www.srihash.org/, sha384 of dist/email.min.js). -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"
+            integrity="sha384-SALc35EccAf6RzGw4iNsyj7kTPr33K7RoGzYu+7heZhT8s0GZouafRiCg1qy44AS"
+            crossorigin="anonymous"></script>
+    <!-- reCAPTCHA widget loader (no integrity hash possible here:
+         Google rotates this file's contents on their side) -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
     (function () {
         'use strict';
@@ -2032,7 +2058,12 @@
             staggerGroups.forEach(function (el) { io.observe(el); });
         }
 
-        /* EmailJS contact form ------------------------------------------- */
+        /* EmailJS contact form -------------------------------------------
+           These three IDs are public by design (every visitor's browser
+           needs them to send). Don't try to hide them — the protections
+           that matter are in the EmailJS dashboard: the origin whitelist
+           and per-template reCAPTCHA. The throttle below just keeps one
+           browser from machine-gunning the inbox through this page. */
         var EMAILJS_SERVICE_ID = 'service_15ofg9r';
         var EMAILJS_TEMPLATE_ID = 'template_5dxi081';
         var EMAILJS_PUBLIC_KEY = 'Ql9fdB8-80sRNy095';
@@ -2040,6 +2071,28 @@
         if (typeof emailjs !== 'undefined') {
             emailjs.init(EMAILJS_PUBLIC_KEY);
         }
+
+        var SEND_COOLDOWN_MS = 60 * 1000;   /* one message per minute */
+        var SEND_HOURLY_CAP = 5;            /* …and five per hour */
+        var MIN_FILL_MS = 3000;             /* humans take longer than 3s */
+        var pageReadyAt = Date.now();
+
+        /* Send timestamps survive a reload; storage can be unavailable
+           (private mode, blocked cookies), so every touch is wrapped. */
+        var sendLog = [];
+        try {
+            sendLog = JSON.parse(localStorage.getItem('wlmac-send-log') || '[]');
+            if (!Array.isArray(sendLog)) sendLog = [];
+        } catch (e) { sendLog = []; }
+
+        var pruneSendLog = function () {
+            var cutoff = Date.now() - 60 * 60 * 1000;
+            sendLog = sendLog.filter(function (t) { return t > cutoff; });
+        };
+        var recordSend = function () {
+            sendLog.push(Date.now());
+            try { localStorage.setItem('wlmac-send-log', JSON.stringify(sendLog)); } catch (e) {}
+        };
 
         var form = document.getElementById('contactForm');
         var status = document.getElementById('contactFormStatus');
@@ -2078,8 +2131,26 @@
 
                 /* Honeypot: bots fill it, people can't see it */
                 if (document.getElementById('contactGotcha').value) {
+                    recordSend(); /* throttles the bot's next try too */
                     setStatus('ok', 'Message sent. We’ll get back to you within a few days.');
                     form.reset();
+                    return;
+                }
+
+                /* Throttle: the send API is publicly callable, so this page
+                   won't be the easy way to flood the inbox. */
+                pruneSendLog();
+                if (Date.now() - pageReadyAt < MIN_FILL_MS) {
+                    setStatus('err', 'One moment — the page just loaded. Give it a few seconds and try again.');
+                    return;
+                }
+                var lastSend = sendLog[sendLog.length - 1];
+                if (lastSend && Date.now() - lastSend < SEND_COOLDOWN_MS) {
+                    setStatus('err', 'You just sent a message. Give it a minute, or email us at hello@wlmacrobotics.ca.');
+                    return;
+                }
+                if (sendLog.length >= SEND_HOURLY_CAP) {
+                    setStatus('err', 'That’s a few messages in a short stretch. Email us directly at hello@wlmacrobotics.ca and we’ll pick it up there.');
                     return;
                 }
 
@@ -2098,9 +2169,23 @@
                 if (!message && !interest) {
                     return markInvalid(fields.message, 'Pick an interest above or add a short message.');
                 }
+                /* Backstop for the maxlength attributes */
+                if (name.length > 100 || email.length > 254 || org.length > 150 || message.length > 4000) {
+                    setStatus('err', 'That’s longer than the form can send. Trim it down, or email us directly.');
+                    return;
+                }
 
                 if (typeof emailjs === 'undefined') {
                     setStatus('err', 'The form couldn’t load on this network. Email us directly at hello@wlmacrobotics.ca (your message is safe in the box below).');
+                    return;
+                }
+
+                /* reCAPTCHA: EmailJS rejects sends without a solved token,
+                   so don't fire a request that's guaranteed to bounce. */
+                var captchaToken = (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse)
+                    ? grecaptcha.getResponse() : '';
+                if (!captchaToken) {
+                    setStatus('err', 'Tick the “I’m not a robot” box above the button first. If it never loaded, email us at hello@wlmacrobotics.ca.');
                     return;
                 }
 
@@ -2117,7 +2202,8 @@
                     email: email,
                     organization: org,
                     interest: interest,
-                    message: fullMessage
+                    message: fullMessage,
+                    'g-recaptcha-response': captchaToken
                 };
 
                 var btn = form.querySelector('button[type="submit"]');
@@ -2128,17 +2214,22 @@
 
                 emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params)
                     .then(function () {
+                        recordSend();
                         status.className = 'form-status form-status--ok';
                         status.innerHTML = '<svg class="status-check" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 12.5 L10 18.5 L20 6.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
                         status.appendChild(document.createTextNode(
                             'Message sent. We’ll reply to ' + email + ' within a few days.'));
                         celebrate(btn);
                         form.reset();
+                        /* Tokens are single-use; reset so a second message works */
+                        if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
                         btn.disabled = false;
                         btn.textContent = 'Sent ✓';
                         form._sentTimer = setTimeout(function () { btn.textContent = 'Send message'; }, 4000);
                     }, function (error) {
                         setStatus('err', 'Couldn’t send. Email us directly at hello@wlmacrobotics.ca; your message is still here.');
+                        /* The token may be spent or expired — get a fresh box */
+                        if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
                         btn.disabled = false;
                         btn.textContent = 'Send message';
                         if (window.console) console.error('EmailJS error:', error);
