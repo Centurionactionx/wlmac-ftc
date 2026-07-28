@@ -3,3 +3,6 @@
 .claude/
 .codex/
 .impeccable/
+
+# Design bake-off: local-only explorations, not part of the published site
+bakeoff/
