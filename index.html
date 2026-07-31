@@ -754,18 +754,18 @@
         /* ------------------------------------------------------------------
            Current sponsors
         ------------------------------------------------------------------ */
-        .sponsor-grid {
+        .partner-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: clamp(20px, 3vw, 32px);
         }
-        .sponsors-section {
+        .partner-section {
             padding-bottom: clamp(28px, 4vw, 48px);
         }
-        .sponsors-section + #season {
+        .partner-section + #season {
             padding-top: clamp(48px, 6vw, 72px);
         }
-        .sponsor-link {
+        .partner-card {
             min-height: clamp(170px, 20vw, 220px);
             padding: clamp(24px, 4vw, 44px);
             border: 1px solid var(--line-soft);
@@ -778,29 +778,29 @@
             box-shadow: 0 18px 44px rgba(4, 10, 18, 0.22);
             transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
         }
-        .sponsor-link:hover {
+        .partner-card:hover {
             border-color: var(--gold-400);
             box-shadow: 0 24px 60px rgba(4, 10, 18, 0.38);
             transform: translateY(-3px);
         }
-        .sponsor-link img {
+        .partner-card img {
             width: auto;
             height: auto;
             margin: 0;
             object-fit: contain;
         }
-        .sponsor-link--fabworks { background: #F5F8F9; }
-        .sponsor-link--fabworks img { width: min(58%, 290px); }
-        .sponsor-link--savi { background: #131313; }
-        .sponsor-link--savi img {
+        .partner-card--fabworks { background: #F5F8F9; }
+        .partner-card--fabworks img { width: min(58%, 290px); }
+        .partner-card--savi { background: #131313; }
+        .partner-card--savi img {
             max-width: 150px;
             max-height: 128px;
         }
         @media (max-width: 620px) {
-            .sponsor-grid { grid-template-columns: 1fr; }
-            .sponsor-link { min-height: 160px; }
-            .sponsor-link--fabworks img { width: min(66%, 250px); }
-            .sponsor-link--savi img { max-height: 112px; }
+            .partner-grid { grid-template-columns: 1fr; }
+            .partner-card { min-height: 160px; }
+            .partner-card--fabworks img { width: min(66%, 250px); }
+            .partner-card--savi img { max-height: 112px; }
         }
 
         /* ------------------------------------------------------------------
@@ -1200,7 +1200,7 @@
         }
         @keyframes bar-draw { from { transform: scaleX(0); } }
         @media (prefers-reduced-motion: reduce) {
-            .shot img, .plate, .btn, .sponsor-link,
+            .shot img, .plate, .btn, .partner-card,
             .btn--gold::before { transition: none !important; }
             .shot:hover img { transform: none; }
         }
@@ -1542,17 +1542,17 @@
     </section>
 
     <!-- current sponsors =============================================== -->
-    <section id="sponsors" class="section sponsors-section" aria-labelledby="sponsors-title">
+    <section id="sponsors" class="section partner-section" aria-labelledby="sponsors-title">
         <div class="container">
             <div class="section-head">
                 <h2 id="sponsors-title">Current sponsors.</h2>
             </div>
 
-            <div class="sponsor-grid" data-stagger>
-                <a class="sponsor-link sponsor-link--fabworks" href="https://www.fabworks.com/" title="Visit Fabworks">
+            <div class="partner-grid" data-stagger>
+                <a class="partner-card partner-card--fabworks" href="https://www.fabworks.com/" title="Visit Fabworks">
                     <img src="images/sponsors/fabworks.svg" width="158" height="25" alt="Fabworks">
                 </a>
-                <a class="sponsor-link sponsor-link--savi" href="https://www.savi.net/" title="Visit SAVI">
+                <a class="partner-card partner-card--savi" href="https://www.savi.net/" title="Visit SAVI">
                     <img src="images/sponsors/savi.svg" width="300" height="214" alt="SAVI Spotlight Audio Visual Industries">
                 </a>
             </div>
