@@ -6,3 +6,8 @@
 
 # Design bake-off: local-only explorations, not part of the published site
 bakeoff/
+
+# Full-res / camera-native originals (HEIC, 4-5MB phone shots, screenshots).
+# Kept on disk for re-exporting, but the site only ever serves the web-sized
+# copies in images/events/. Delete this folder freely.
+images/_originals/
