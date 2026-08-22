@@ -210,7 +210,7 @@
                 </div>
                 <div class="card">
                     <h3>Outreach</h3>
-                    <p>200+ students reached through six events and three partner schools: our
+                    <p>200+ students reached through ten events and three partner schools: our
                     Science and Engineering Olympics, the Library Open House, Grade 9 Night, and
                     community workshops across North York. We're building the local STEM pipeline
                     season by season.</p>
@@ -410,10 +410,10 @@
     <section id="season" class="section">
         <div class="container">
             <div class="section-head">
-                <h2>Two teams. Eight events. A second year running.</h2>
+                <h2>Two teams. Ten events. A second year running.</h2>
                 <p class="lede">
                     Here's what the program, the outreach, and the season look like in action.
-                    Every photo below is our own students, robots, and events.
+                    Every photo and video below shows our own students, robots, and events.
                 </p>
             </div>
 
@@ -529,6 +529,28 @@
                 </figure>
 
                 <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="human-moves-aug-14" aria-label="View photos and videos from the August 14 Human Moves Sports Camp workshop">
+                        <img src="images/events/human-moves-aug-14/2026-08-14-human-moves-sports-camp-03.jpg" width="1600" height="1200" alt="Campers seated at tables while WLMAC Robotics mentors prepare an Arduino workshop at Human Moves Sports Camp" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Outreach</span>
+                        <strong class="shot__title">Human Moves Sports Camp &middot; August 14</strong>
+                        <p class="shot__note">Campers worked in small groups with WLMAC mentors, wiring Arduino boards and testing their circuits at the Hangar.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
+                    <button type="button" class="shot__frame" data-event="human-moves-aug-21" aria-label="View photos from the August 21 Human Moves Sports Camp workshop">
+                        <img src="images/events/human-moves-aug-21/2026-08-21-human-moves-sports-camp-06.jpg" width="1600" height="1200" alt="A WLMAC Robotics mentor helping campers connect an Arduino and jumper wires at Human Moves Sports Camp" loading="lazy">
+                    </button>
+                    <figcaption>
+                        <span class="shot__cat">Outreach</span>
+                        <strong class="shot__title">Human Moves Sports Camp &middot; August 21</strong>
+                        <p class="shot__note">Campers wired breadboards, connected servos, and debugged their Arduino builds with WLMAC mentors.</p>
+                    </figcaption>
+                </figure>
+
+                <figure class="shot">
                     <button type="button" class="shot__frame" data-event="joyce" aria-label="View photos from the Joyce community event">
                         <img src="images/events/joyce/joyce_event.jpg" width="1000" height="750" alt="Students working with robots at the Joyce community event" loading="lazy">
                     </button>
@@ -541,7 +563,7 @@
             </div>
 
             <div class="gallery-foot">
-                <button type="button" class="btn btn--ghost gallery-more">Show all 11 photos</button>
+                <button type="button" class="btn btn--ghost gallery-more">Show all 13 highlights</button>
             </div>
         </div>
     </section>
@@ -645,26 +667,26 @@
     </main>
 
     <!-- event lightbox ================================================= -->
-    <dialog class="lightbox" id="eventLightbox" aria-label="Event photo gallery">
+    <dialog class="lightbox" id="eventLightbox" aria-label="Event media gallery">
         <div class="lightbox__inner">
             <div class="lightbox__head">
                 <p class="lightbox__heading">
                     <span class="lightbox__title"></span>
                     <span class="lightbox__count" aria-live="polite"></span>
                 </p>
-                <button type="button" class="lightbox__close" aria-label="Close photo gallery">✕</button>
+                <button type="button" class="lightbox__close" aria-label="Close media gallery">✕</button>
             </div>
             <div class="lightbox__stage">
-                <div class="lightbox__track" aria-label="Event photos"></div>
-                <button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous photo">
+                <div class="lightbox__track" role="group" aria-label="Event photos and videos"></div>
+                <button type="button" class="lightbox__nav lightbox__nav--prev" aria-label="Previous media item">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
                 </button>
-                <button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next photo">
+                <button type="button" class="lightbox__nav lightbox__nav--next" aria-label="Next media item">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
                 </button>
             </div>
             <p class="lightbox__note"></p>
-            <!-- One segment per photo, built in JS. Doubles as the count:
+            <!-- One segment per media item, built in JS. Doubles as the count:
                  filled = seen, filling = current, empty = still to come. -->
             <div class="lightbox__timer" aria-hidden="true"></div>
         </div>
@@ -876,26 +898,28 @@
         }
 
         /* Event lightbox ---------------------------------------------------
-           Every key below matches the data-event on its gallery card. Photos
-           usually live in the same-named folder under images/events/, though
+           Every key below matches the data-event on its gallery card. Media
+           usually lives in the same-named folder under images/events/, though
            they don't have to — 'qualifier' and 'robot-decode' are two separate
            single-photo cards that both draw from images/events/competition/.
 
-           A card with one photo opens as a plain enlarged view: no arrows, no
+           A card with one item opens as a plain enlarged view: no arrows, no
            counter, no progress bar. Two or more turn it into a carousel, and
-           the bar under the photo gets one segment per photo.
+           the bar under the stage gets one segment per item. Videos use native
+           controls and park the slideshow until the visitor moves on.
 
-           To add photos to an event: drop the file in its folder, then add a
-           line to that event's array here: { src, alt, w, h }.
+           To add media to an event: drop the file in its folder, then add an
+           image as { src, alt, w, h } or a video as
+           { type: 'video', src, poster, captions, label, w, h }.
            The first entry is the slide the lightbox opens on; the gallery
            card's own image tag is the cover and is set in the markup above.
-           w/h are the real pixel dimensions — they reserve space so the
-           page doesn't jump while the photo loads.
+           w/h are the real pixel dimensions — they reserve space while each
+           item loads.
 
            To add a whole new event: make images/events/<key>/, copy a
            figure.shot block in the gallery and point its data-event at
            <key>, then add a matching "<key>: [ ... ]" entry below. */
-        var EVENT_PHOTOS = {
+        var EVENT_MEDIA = {
             qualifier: [
                 { src: 'images/events/competition/qualifier.jpg', alt: 'MechLyons robot 32514 mid-match on the competition field', w: 1000, h: 562 }
             ],
@@ -931,6 +955,19 @@
                 { src: 'images/events/dublin-aug4/demo.jpg', alt: 'Students around a round table watching a mentor demonstrate an Arduino board', w: 1000, h: 750 },
                 { src: 'images/events/dublin-aug4/circuit.jpg', alt: 'A student reacting to a finished LED circuit built on an Arduino and breadboard', w: 1000, h: 750 }
             ],
+            'human-moves-aug-14': [
+                { src: 'images/events/human-moves-aug-14/2026-08-14-human-moves-sports-camp-03.jpg', alt: 'Campers seated at tables while WLMAC Robotics mentors prepare an Arduino workshop at Human Moves Sports Camp', w: 1600, h: 1200 },
+                { type: 'video', src: 'images/events/human-moves-aug-14/2026-08-14-human-moves-sports-camp-01.mp4', poster: 'images/events/human-moves-aug-14/2026-08-14-human-moves-sports-camp-01-poster.jpg', captions: 'images/events/human-moves-aug-14/2026-08-14-human-moves-sports-camp-01-captions.vtt', label: 'Campers wiring an Arduino circuit together at Human Moves Sports Camp on August 14', w: 1280, h: 720 },
+                { type: 'video', src: 'images/events/human-moves-aug-14/2026-08-14-human-moves-sports-camp-02.mp4', poster: 'images/events/human-moves-aug-14/2026-08-14-human-moves-sports-camp-02-poster.jpg', captions: 'images/events/human-moves-aug-14/2026-08-14-human-moves-sports-camp-02-captions.vtt', label: 'A WLMAC Robotics mentor helping campers debug an Arduino circuit at Human Moves Sports Camp on August 14', w: 1280, h: 720 }
+            ],
+            'human-moves-aug-21': [
+                { src: 'images/events/human-moves-aug-21/2026-08-21-human-moves-sports-camp-01.jpg', alt: 'Two campers connecting jumper wires beside an Arduino and breadboard at Human Moves Sports Camp', w: 1600, h: 1200 },
+                { src: 'images/events/human-moves-aug-21/2026-08-21-human-moves-sports-camp-02.jpg', alt: 'A WLMAC Robotics mentor showing campers how to wire a breadboard at Human Moves Sports Camp', w: 1600, h: 1200 },
+                { src: 'images/events/human-moves-aug-21/2026-08-21-human-moves-sports-camp-03.jpg', alt: 'Three campers watching a WLMAC Robotics mentor connect an Arduino circuit at Human Moves Sports Camp', w: 1600, h: 1200 },
+                { src: 'images/events/human-moves-aug-21/2026-08-21-human-moves-sports-camp-04.jpg', alt: 'Campers gathered around a table while mentors help with small circuit builds at Human Moves Sports Camp', w: 1600, h: 900 },
+                { src: 'images/events/human-moves-aug-21/2026-08-21-human-moves-sports-camp-05.jpg', alt: 'Two groups of campers working through Arduino projects with WLMAC Robotics mentors', w: 1200, h: 1600 },
+                { src: 'images/events/human-moves-aug-21/2026-08-21-human-moves-sports-camp-06.jpg', alt: 'A WLMAC Robotics mentor helping campers connect an Arduino and jumper wires at Human Moves Sports Camp', w: 1600, h: 1200 }
+            ],
             joyce: [
                 { src: 'images/events/joyce/joyce_event.jpg', alt: 'A mentor leaning over a table to help students wire a robotics kit at the Joyce community event', w: 1000, h: 750 },
                 { src: 'images/events/joyce/room-help.jpg', alt: 'A mentor standing at a table while students work through a robotics kit and laptop at the Joyce community event', w: 1000, h: 1333 }
@@ -953,7 +990,7 @@
             var lbOpener = null;
             var lbDwell = 4000;
 
-            /* Rebuild the segment strip — one segment per photo. */
+            /* Rebuild the segment strip — one segment per media item. */
             var lbBuildSegments = function () {
                 lbTimer.innerHTML = '';
                 for (var i = 0; i < lbTotal; i++) {
@@ -964,7 +1001,7 @@
                 }
             };
 
-            /* Segments behind the current photo read as done, the current one
+            /* Segments behind the current item read as done, the current one
                fills. Moving the is-current class to a different segment is what
                restarts its fill animation, including on the wrap back to 0. */
             var lbSyncSegments = function () {
@@ -975,15 +1012,35 @@
                 }
             };
 
+            /* Keep native media controls inside the visible slide. Without
+               inert, the browser can tab to and play a video hidden offscreen. */
+            var lbSyncSlides = function () {
+                Array.prototype.forEach.call(lbTrack.children, function (slide, i) {
+                    var active = i === lbCurrent;
+                    slide.inert = !active;
+                    slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+                    var video = slide.querySelector('video');
+                    if (video) video.tabIndex = active ? 0 : -1;
+                });
+            };
+
             var lbSetPosition = function () {
                 lbCount.textContent = (lbCurrent + 1) + ' / ' + lbTotal;
+                lbSyncSlides();
                 lbSyncSegments();
             };
 
             var lbGoTo = function (index, instant) {
                 if (!lbTotal) return;
-                lbCurrent = ((index % lbTotal) + lbTotal) % lbTotal;
-                var smooth = !instant && !lbReduce.matches;
+                var previousIndex = lbCurrent;
+                var nextIndex = ((index % lbTotal) + lbTotal) % lbTotal;
+                if (nextIndex !== lbCurrent) lbPauseVideos();
+                lbCurrent = nextIndex;
+                /* A wrap from the last item to the first (or back again) spans
+                   the whole track. Jump it instantly so an intermediate snap
+                   point cannot steal the final position. */
+                var wraps = Math.abs(nextIndex - previousIndex) > 1;
+                var smooth = !instant && !lbReduce.matches && !wraps;
                 /* Disown the scroll events this move is about to emit. Sampling
                    the track mid-glide reads a stale index, and acting on it used
                    to drag the bar back to 0 a second or two after opening. */
@@ -1011,6 +1068,17 @@
                 lbTimer.classList.add('is-idle');
             };
 
+            var lbPauseVideos = function (except) {
+                lbTrack.querySelectorAll('video').forEach(function (video) {
+                    if (video !== except) video.pause();
+                });
+            };
+
+            var lbCurrentHasVideo = function () {
+                var slide = lbTrack.children[lbCurrent];
+                return !!(slide && slide.querySelector('video'));
+            };
+
             /* One Web Animation owns the fill AND schedules the advance, so the
                bar and the slideshow cannot drift apart the way a CSS animation
                plus a separate setInterval could — that pairing was what made the
@@ -1018,7 +1086,7 @@
             var lbStartAuto = function () {
                 lbCancelAnim();
                 var seg = lbTimer.children[lbCurrent];
-                if (lbTotal < 2 || lbReduce.matches || !seg) {
+                if (lbTotal < 2 || lbReduce.matches || !seg || lbCurrentHasVideo()) {
                     lbTimer.classList.add('is-idle');
                     return;
                 }
@@ -1040,7 +1108,7 @@
                 }, function () { /* cancelled: its replacement drives from here */ });
             };
 
-            /* Pointer resting on the photo holds the fill where it is; leaving
+            /* Pointer resting on the media holds the fill where it is; leaving
                picks up from there instead of snapping back to 0. */
             var lbPauseAuto = function () {
                 if (lbAnim && lbAnim.playState === 'running') lbAnim.pause();
@@ -1052,26 +1120,52 @@
             };
 
             var lbOpen = function (opener) {
-                var photos = EVENT_PHOTOS[opener.getAttribute('data-event')];
-                if (!photos || !photos.length) return;
+                var media = EVENT_MEDIA[opener.getAttribute('data-event')];
+                if (!media || !media.length) return;
                 lbOpener = opener;
                 var shot = opener.closest('.shot');
                 lbTitle.textContent = shot ? shot.querySelector('.shot__title').textContent : '';
                 lbNote.textContent = shot ? shot.querySelector('.shot__note').textContent : '';
                 lbTrack.innerHTML = '';
-                photos.forEach(function (photo, i) {
+                media.forEach(function (item, i) {
                     var slide = document.createElement('div');
                     slide.className = 'lightbox__slide';
-                    var img = document.createElement('img');
-                    img.src = photo.src;
-                    img.alt = photo.alt;
-                    img.width = photo.w;
-                    img.height = photo.h;
-                    if (i > 0) img.loading = 'lazy';
-                    slide.appendChild(img);
+                    if (item.type === 'video') {
+                        var video = document.createElement('video');
+                        video.src = item.src;
+                        video.controls = true;
+                        video.playsInline = true;
+                        video.preload = 'metadata';
+                        video.poster = item.poster;
+                        video.width = item.w;
+                        video.height = item.h;
+                        video.setAttribute('aria-label', item.label);
+                        if (item.captions) {
+                            var captions = document.createElement('track');
+                            captions.kind = 'captions';
+                            captions.label = 'English';
+                            captions.srclang = 'en';
+                            captions.src = item.captions;
+                            captions.default = true;
+                            video.appendChild(captions);
+                        }
+                        video.addEventListener('play', function () {
+                            lbPauseVideos(video);
+                            lbStopAuto();
+                        });
+                        slide.appendChild(video);
+                    } else {
+                        var img = document.createElement('img');
+                        img.src = item.src;
+                        img.alt = item.alt;
+                        img.width = item.w;
+                        img.height = item.h;
+                        if (i > 0) img.loading = 'lazy';
+                        slide.appendChild(img);
+                    }
                     lbTrack.appendChild(slide);
                 });
-                lbTotal = photos.length;
+                lbTotal = media.length;
                 lbBuildSegments();
                 lightbox.classList.toggle('lightbox--single', lbTotal < 2);
                 lightbox.showModal();
@@ -1095,6 +1189,7 @@
                 lightbox.close();
             });
             lightbox.addEventListener('keydown', function (event) {
+                if (event.target && event.target.tagName === 'VIDEO') return;
                 if (event.key === 'ArrowLeft') { lbGoTo(lbCurrent - 1); lbStartAuto(); }
                 if (event.key === 'ArrowRight') { lbGoTo(lbCurrent + 1); lbStartAuto(); }
             });
@@ -1107,10 +1202,11 @@
                 clearTimeout(lbScrollDebounce);
                 clearTimeout(lbProgScroll);
                 lbProgScroll = null;
+                lbPauseVideos();
                 lbTrack.innerHTML = '';
                 if (lbOpener) { lbOpener.focus(); lbOpener = null; }
             });
-            /* Courtesy pause while the pointer rests on the photos */
+            /* Courtesy pause while the pointer rests on the media */
             lbTrack.addEventListener('pointerenter', lbPauseAuto);
             lbTrack.addEventListener('pointerleave', lbResumeAuto);
             /* Touch swipes: keep the counter in sync and restart the clock. Only
@@ -1125,9 +1221,10 @@
                     var index = Math.round(lbTrack.scrollLeft / width);
                     if (index === lbCurrent || index < 0 || index >= lbTotal) return;
                     var held = lbAnim && lbAnim.playState === 'paused';
+                    lbPauseVideos();
                     lbCurrent = index;
                     lbSetPosition();
-                    /* Pointer still resting on the photo: stay parked rather than
+                    /* Pointer still resting on the media: stay parked rather than
                        start a clock the user is holding still anyway. */
                     if (held) lbStopAuto();
                     else lbStartAuto();
