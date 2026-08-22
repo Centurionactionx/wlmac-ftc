@@ -1012,15 +1012,15 @@
                 }
             };
 
-            /* Keep native media controls inside the visible slide. Without
-               inert, the browser can tab to and play a video hidden offscreen. */
+            /* Keep player controls inside the visible slide. Without inert,
+               the browser can tab to and play a video hidden offscreen. */
             var lbSyncSlides = function () {
                 Array.prototype.forEach.call(lbTrack.children, function (slide, i) {
                     var active = i === lbCurrent;
                     slide.inert = !active;
                     slide.setAttribute('aria-hidden', active ? 'false' : 'true');
-                    var video = slide.querySelector('video');
-                    if (video) video.tabIndex = active ? 0 : -1;
+                    var player = slide.querySelector('.video-player');
+                    if (player) player.tabIndex = active ? 0 : -1;
                 });
             };
 
@@ -1119,6 +1119,446 @@
                 else lbStartAuto();
             };
 
+            var VIDEO_ICONS = {
+                play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/></svg>',
+                pause: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>',
+                replay: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
+                volume: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12"/></svg>',
+                muted: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>',
+                captions: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 11h3M7 15h4M14 11h3M14 15h3"/></svg>',
+                fullscreen: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>',
+                exitFullscreen: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8H3M8 8V3M16 8h5M16 8V3M8 16H3M8 16v5M16 16h5M16 16v5"/></svg>'
+            };
+
+            var lbFormatTime = function (seconds) {
+                if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
+                var total = Math.floor(seconds);
+                var hours = Math.floor(total / 3600);
+                var minutes = Math.floor((total % 3600) / 60);
+                var remainder = total % 60;
+                return (hours ? hours + ':' + String(minutes).padStart(2, '0') : minutes) +
+                    ':' + String(remainder).padStart(2, '0');
+            };
+
+            var lbVideoButton = function (className, label, icon) {
+                var button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'video-player__button ' + className;
+                button.setAttribute('aria-label', label);
+                button.innerHTML = icon;
+                return button;
+            };
+
+            var lbBuildVideoPlayer = function (item) {
+                var player = document.createElement('div');
+                player.className = 'video-player';
+                player.tabIndex = -1;
+                player.setAttribute('role', 'group');
+                player.setAttribute('aria-label', item.label);
+
+                var video = document.createElement('video');
+                video.className = 'video-player__media';
+                video.src = item.src;
+                video.controls = true; /* native fallback until the custom UI mounts */
+                video.playsInline = true;
+                video.preload = 'metadata';
+                video.poster = item.poster;
+                video.width = item.w;
+                video.height = item.h;
+                video.tabIndex = -1;
+                video.setAttribute('aria-label', item.label);
+                video.setAttribute('controlslist', 'nodownload noplaybackrate noremoteplayback');
+                player.appendChild(video);
+
+                var captionElement = null;
+                if (item.captions) {
+                    captionElement = document.createElement('track');
+                    captionElement.kind = 'captions';
+                    captionElement.label = 'English';
+                    captionElement.srclang = 'en';
+                    captionElement.src = item.captions;
+                    captionElement.default = false;
+                    video.appendChild(captionElement);
+                }
+
+                var captionDisplay = document.createElement('div');
+                captionDisplay.className = 'video-player__caption';
+                captionDisplay.setAttribute('aria-hidden', 'true');
+                player.appendChild(captionDisplay);
+
+                var centerPlay = lbVideoButton('video-player__center', 'Play video', VIDEO_ICONS.play);
+                player.appendChild(centerPlay);
+
+                var spinner = document.createElement('span');
+                spinner.className = 'video-player__spinner';
+                spinner.setAttribute('aria-hidden', 'true');
+                player.appendChild(spinner);
+
+                var playerStatus = document.createElement('span');
+                playerStatus.className = 'visually-hidden';
+                playerStatus.setAttribute('role', 'status');
+                playerStatus.setAttribute('aria-live', 'polite');
+                playerStatus.setAttribute('aria-atomic', 'true');
+                player.appendChild(playerStatus);
+
+                var errorPanel = document.createElement('div');
+                errorPanel.className = 'video-player__error';
+                errorPanel.setAttribute('role', 'status');
+                var errorText = document.createElement('span');
+                errorText.textContent = 'Video couldn\'t load.';
+                var retry = lbVideoButton('video-player__retry', 'Retry video', VIDEO_ICONS.replay);
+                var retryText = document.createElement('span');
+                retryText.textContent = 'Retry';
+                retry.appendChild(retryText);
+                errorPanel.appendChild(errorText);
+                errorPanel.appendChild(retry);
+                player.appendChild(errorPanel);
+
+                var controls = document.createElement('div');
+                controls.className = 'video-player__controls';
+                controls.setAttribute('role', 'group');
+                controls.setAttribute('aria-label', 'Video controls');
+
+                var timeline = document.createElement('div');
+                timeline.className = 'video-player__timeline';
+                var seek = document.createElement('input');
+                seek.className = 'video-player__range video-player__seek';
+                seek.type = 'range';
+                seek.min = '0';
+                seek.max = '1000';
+                seek.step = '1';
+                seek.value = '0';
+                seek.setAttribute('aria-label', 'Video position');
+                seek.setAttribute('aria-valuetext', '0:00 of 0:00');
+                seek.style.setProperty('--progress', '0%');
+                seek.style.setProperty('--buffered', '0%');
+                var seekBubble = document.createElement('span');
+                seekBubble.className = 'video-player__seek-time';
+                seekBubble.textContent = '0:00';
+                seekBubble.setAttribute('aria-hidden', 'true');
+                timeline.appendChild(seek);
+                timeline.appendChild(seekBubble);
+                controls.appendChild(timeline);
+
+                var row = document.createElement('div');
+                row.className = 'video-player__control-row';
+                var play = lbVideoButton('video-player__play', 'Play video', VIDEO_ICONS.play);
+                row.appendChild(play);
+
+                var time = document.createElement('span');
+                time.className = 'video-player__time';
+                time.setAttribute('aria-hidden', 'true');
+                var elapsed = document.createElement('span');
+                elapsed.textContent = '0:00';
+                var divider = document.createElement('span');
+                divider.className = 'video-player__time-divider';
+                divider.textContent = '/';
+                var duration = document.createElement('span');
+                duration.textContent = '0:00';
+                time.appendChild(elapsed);
+                time.appendChild(divider);
+                time.appendChild(duration);
+                row.appendChild(time);
+
+                var audio = document.createElement('div');
+                audio.className = 'video-player__audio';
+                var mute = lbVideoButton('video-player__mute', 'Mute video', VIDEO_ICONS.volume);
+                mute.setAttribute('aria-pressed', 'false');
+                var volume = document.createElement('input');
+                volume.className = 'video-player__range video-player__volume';
+                volume.type = 'range';
+                volume.min = '0';
+                volume.max = '1';
+                volume.step = '0.05';
+                volume.value = String(video.volume);
+                volume.setAttribute('aria-label', 'Video volume');
+                volume.setAttribute('aria-valuetext', '100 percent');
+                volume.style.setProperty('--volume', '100%');
+                audio.appendChild(mute);
+                audio.appendChild(volume);
+                row.appendChild(audio);
+
+                var captions = lbVideoButton('video-player__captions', 'Captions', VIDEO_ICONS.captions);
+                captions.setAttribute('aria-pressed', captionElement ? 'true' : 'false');
+                captions.hidden = !captionElement;
+                row.appendChild(captions);
+
+                var fullscreen = lbVideoButton('video-player__fullscreen', 'Enter fullscreen', VIDEO_ICONS.fullscreen);
+                fullscreen.setAttribute('aria-pressed', 'false');
+                fullscreen.hidden = typeof player.requestFullscreen !== 'function';
+                row.appendChild(fullscreen);
+                controls.appendChild(row);
+                player.appendChild(controls);
+
+                var hideTimer = null;
+                var isSeeking = false;
+                var lastVolume = video.volume || 1;
+                var captionsInitialized = false;
+                var captionsTouched = false;
+
+                var setButtonIcon = function (button, icon) {
+                    var extra = button.querySelector('span');
+                    button.innerHTML = icon;
+                    if (extra) button.appendChild(extra);
+                };
+
+                var hideControls = function () {
+                    if (!video.paused && !video.ended && !isSeeking && !player.matches(':focus-within')) {
+                        player.classList.add('is-idle');
+                    }
+                };
+
+                var showControls = function () {
+                    clearTimeout(hideTimer);
+                    player.classList.remove('is-idle');
+                    if (!video.paused && !video.ended) hideTimer = setTimeout(hideControls, 2400);
+                };
+
+                var updatePlayState = function () {
+                    var playing = !video.paused && !video.ended;
+                    player.classList.toggle('is-playing', playing);
+                    player.classList.toggle('is-ended', video.ended);
+                    setButtonIcon(play, playing ? VIDEO_ICONS.pause : (video.ended ? VIDEO_ICONS.replay : VIDEO_ICONS.play));
+                    setButtonIcon(centerPlay, video.ended ? VIDEO_ICONS.replay : VIDEO_ICONS.play);
+                    play.setAttribute('aria-label', playing ? 'Pause video' : (video.ended ? 'Replay video' : 'Play video'));
+                    centerPlay.setAttribute('aria-label', video.ended ? 'Replay video' : 'Play video');
+                    if (playing) showControls();
+                    else {
+                        clearTimeout(hideTimer);
+                        player.classList.remove('is-idle');
+                    }
+                };
+
+                var updateProgress = function () {
+                    var total = Number.isFinite(video.duration) ? video.duration : 0;
+                    var current = Number.isFinite(video.currentTime) ? video.currentTime : 0;
+                    var progress = total ? Math.min(100, (current / total) * 100) : 0;
+                    if (!isSeeking) seek.value = String(Math.round(progress * 10));
+                    seek.style.setProperty('--progress', progress + '%');
+                    elapsed.textContent = lbFormatTime(current);
+                    duration.textContent = lbFormatTime(total);
+                    seek.setAttribute('aria-valuetext', lbFormatTime(current) + ' of ' + lbFormatTime(total));
+                };
+
+                var updateBuffered = function () {
+                    var buffered = 0;
+                    if (video.duration && video.buffered.length) {
+                        buffered = Math.min(100, (video.buffered.end(video.buffered.length - 1) / video.duration) * 100);
+                    }
+                    var played = Number(seek.value) / 10;
+                    seek.style.setProperty('--buffered', Math.max(buffered, played) + '%');
+                };
+
+                var updateVolume = function () {
+                    var muted = video.muted || video.volume === 0;
+                    var level = muted ? 0 : video.volume;
+                    mute.setAttribute('aria-pressed', muted ? 'true' : 'false');
+                    mute.setAttribute('aria-label', muted ? 'Unmute video' : 'Mute video');
+                    setButtonIcon(mute, muted ? VIDEO_ICONS.muted : VIDEO_ICONS.volume);
+                    volume.value = String(level);
+                    volume.style.setProperty('--volume', (level * 100) + '%');
+                    volume.setAttribute('aria-valuetext', Math.round(level * 100) + ' percent');
+                    player.classList.toggle('is-muted', muted);
+                };
+
+                var updateCaptions = function () {
+                    var track = video.textTracks && video.textTracks[0];
+                    var enabled = !!track && track.mode !== 'disabled';
+                    captions.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+                    captions.classList.toggle('is-active', enabled);
+                    if (!enabled) captionDisplay.textContent = '';
+                };
+
+                var updateCaptionCue = function () {
+                    var track = video.textTracks && video.textTracks[0];
+                    if (!track || track.mode === 'disabled' || !track.activeCues) {
+                        captionDisplay.textContent = '';
+                        return;
+                    }
+                    captionDisplay.textContent = Array.prototype.map.call(track.activeCues, function (cue) {
+                        return cue.text;
+                    }).join(' ');
+                };
+
+                var updateFullscreen = function () {
+                    var active = document.fullscreenElement === player;
+                    fullscreen.setAttribute('aria-pressed', active ? 'true' : 'false');
+                    fullscreen.setAttribute('aria-label', active ? 'Exit fullscreen' : 'Enter fullscreen');
+                    setButtonIcon(fullscreen, active ? VIDEO_ICONS.exitFullscreen : VIDEO_ICONS.fullscreen);
+                };
+
+                var togglePlay = function () {
+                    if (video.ended) video.currentTime = 0;
+                    if (video.paused || video.ended) {
+                        var request = video.play();
+                        if (request && typeof request.catch === 'function') {
+                            request.catch(function () {
+                                /* Autoplay policy can reject synthetic play
+                                   requests even when the file is healthy. */
+                                updatePlayState();
+                                showControls();
+                            });
+                        }
+                    } else video.pause();
+                };
+
+                play.addEventListener('click', togglePlay);
+                centerPlay.addEventListener('click', togglePlay);
+                video.addEventListener('click', togglePlay);
+                video.addEventListener('dblclick', function () { fullscreen.click(); });
+
+                seek.addEventListener('pointerdown', function () {
+                    isSeeking = true;
+                    player.classList.add('is-seeking');
+                    showControls();
+                });
+                seek.addEventListener('input', function () {
+                    var target = video.duration ? (Number(seek.value) / 1000) * video.duration : 0;
+                    if (Number.isFinite(target)) video.currentTime = target;
+                    var progress = Number(seek.value) / 10;
+                    seek.style.setProperty('--progress', progress + '%');
+                    seekBubble.style.left = progress + '%';
+                    seekBubble.textContent = lbFormatTime(target);
+                    seek.setAttribute('aria-valuetext', lbFormatTime(target) + ' of ' + lbFormatTime(video.duration));
+                });
+                seek.addEventListener('keydown', function (event) {
+                    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+                    event.preventDefault();
+                    var change = event.key === 'ArrowLeft' ? -5 : 5;
+                    video.currentTime = Math.max(0, Math.min(video.duration || 0, video.currentTime + change));
+                    updateProgress();
+                    showControls();
+                });
+                var finishSeeking = function () {
+                    isSeeking = false;
+                    player.classList.remove('is-seeking');
+                    updateProgress();
+                    showControls();
+                };
+                seek.addEventListener('change', finishSeeking);
+                seek.addEventListener('pointerup', finishSeeking);
+                seek.addEventListener('pointercancel', finishSeeking);
+
+                mute.addEventListener('click', function () {
+                    if (video.muted || video.volume === 0) {
+                        video.muted = false;
+                        if (video.volume === 0) video.volume = lastVolume || 1;
+                    } else {
+                        lastVolume = video.volume;
+                        video.muted = true;
+                    }
+                });
+                volume.addEventListener('input', function () {
+                    video.volume = Number(volume.value);
+                    video.muted = video.volume === 0;
+                    if (video.volume > 0) lastVolume = video.volume;
+                });
+
+                captions.addEventListener('click', function () {
+                    var track = video.textTracks && video.textTracks[0];
+                    if (!track) return;
+                    captionsTouched = true;
+                    track.mode = track.mode === 'disabled' ? 'hidden' : 'disabled';
+                    updateCaptions();
+                    updateCaptionCue();
+                });
+
+                fullscreen.addEventListener('click', function () {
+                    if (document.fullscreenElement === player) {
+                        document.exitFullscreen();
+                    } else if (player.requestFullscreen) {
+                        player.requestFullscreen().catch(function () { /* browser denied fullscreen */ });
+                    }
+                });
+
+                retry.addEventListener('click', function () {
+                    player.classList.remove('has-error');
+                    video.load();
+                });
+
+                player.addEventListener('pointermove', showControls);
+                player.addEventListener('pointerdown', showControls);
+                player.addEventListener('pointerleave', function () {
+                    clearTimeout(hideTimer);
+                    hideTimer = setTimeout(hideControls, 500);
+                });
+                player.addEventListener('focusin', showControls);
+                player.addEventListener('focusout', function () { setTimeout(showControls, 0); });
+                player.addEventListener('keydown', function (event) {
+                    showControls();
+                    if (event.target !== player) return;
+                    var handled = true;
+                    if (event.key === ' ' || event.key.toLowerCase() === 'k') togglePlay();
+                    else if (event.key === 'ArrowLeft') video.currentTime = Math.max(0, video.currentTime - 5);
+                    else if (event.key === 'ArrowRight') video.currentTime = Math.min(video.duration || 0, video.currentTime + 5);
+                    else if (event.key === 'ArrowUp') video.volume = Math.min(1, video.volume + 0.1);
+                    else if (event.key === 'ArrowDown') video.volume = Math.max(0, video.volume - 0.1);
+                    else if (event.key.toLowerCase() === 'm') mute.click();
+                    else if (event.key.toLowerCase() === 'c') captions.click();
+                    else if (event.key.toLowerCase() === 'f') fullscreen.click();
+                    else handled = false;
+                    if (handled) event.preventDefault();
+                });
+
+                video.addEventListener('play', function () {
+                    lbPauseVideos(video);
+                    lbStopAuto();
+                    updatePlayState();
+                });
+                video.addEventListener('pause', function () {
+                    player.classList.remove('is-buffering');
+                    playerStatus.textContent = '';
+                    updatePlayState();
+                });
+                video.addEventListener('ended', updatePlayState);
+                video.addEventListener('loadedmetadata', function () {
+                    updateProgress();
+                    updateBuffered();
+                });
+                video.addEventListener('durationchange', updateProgress);
+                video.addEventListener('timeupdate', updateProgress);
+                video.addEventListener('progress', updateBuffered);
+                video.addEventListener('volumechange', updateVolume);
+                video.addEventListener('waiting', function () {
+                    if (!video.paused) {
+                        player.classList.add('is-buffering');
+                        playerStatus.textContent = 'Video buffering.';
+                    }
+                });
+                var clearBuffering = function () {
+                    player.classList.remove('is-buffering');
+                    playerStatus.textContent = '';
+                };
+                video.addEventListener('playing', clearBuffering);
+                video.addEventListener('canplay', clearBuffering);
+                video.addEventListener('error', function () {
+                    player.classList.remove('is-buffering');
+                    playerStatus.textContent = '';
+                    player.classList.add('has-error');
+                });
+                player.addEventListener('fullscreenchange', updateFullscreen);
+
+                if (captionElement) {
+                    var showInitialCaptions = function () {
+                        var track = video.textTracks && video.textTracks[0];
+                        if (!track || captionsInitialized) return;
+                        captionsInitialized = true;
+                        if (!captionsTouched) track.mode = 'hidden';
+                        track.addEventListener('cuechange', updateCaptionCue);
+                        updateCaptions();
+                        updateCaptionCue();
+                    };
+                    captionElement.addEventListener('load', showInitialCaptions);
+                    setTimeout(showInitialCaptions, 0);
+                }
+
+                updatePlayState();
+                updateVolume();
+                updateCaptions();
+                video.controls = false;
+                return player;
+            };
+
             var lbOpen = function (opener) {
                 var media = EVENT_MEDIA[opener.getAttribute('data-event')];
                 if (!media || !media.length) return;
@@ -1131,29 +1571,7 @@
                     var slide = document.createElement('div');
                     slide.className = 'lightbox__slide';
                     if (item.type === 'video') {
-                        var video = document.createElement('video');
-                        video.src = item.src;
-                        video.controls = true;
-                        video.playsInline = true;
-                        video.preload = 'metadata';
-                        video.poster = item.poster;
-                        video.width = item.w;
-                        video.height = item.h;
-                        video.setAttribute('aria-label', item.label);
-                        if (item.captions) {
-                            var captions = document.createElement('track');
-                            captions.kind = 'captions';
-                            captions.label = 'English';
-                            captions.srclang = 'en';
-                            captions.src = item.captions;
-                            captions.default = true;
-                            video.appendChild(captions);
-                        }
-                        video.addEventListener('play', function () {
-                            lbPauseVideos(video);
-                            lbStopAuto();
-                        });
-                        slide.appendChild(video);
+                        slide.appendChild(lbBuildVideoPlayer(item));
                     } else {
                         var img = document.createElement('img');
                         img.src = item.src;
@@ -1189,7 +1607,7 @@
                 lightbox.close();
             });
             lightbox.addEventListener('keydown', function (event) {
-                if (event.target && event.target.tagName === 'VIDEO') return;
+                if (event.target && event.target.closest && event.target.closest('.video-player')) return;
                 if (event.key === 'ArrowLeft') { lbGoTo(lbCurrent - 1); lbStartAuto(); }
                 if (event.key === 'ArrowRight') { lbGoTo(lbCurrent + 1); lbStartAuto(); }
             });
@@ -1203,6 +1621,9 @@
                 clearTimeout(lbProgScroll);
                 lbProgScroll = null;
                 lbPauseVideos();
+                if (document.fullscreenElement && lightbox.contains(document.fullscreenElement)) {
+                    document.exitFullscreen().catch(function () { /* already leaving fullscreen */ });
+                }
                 lbTrack.innerHTML = '';
                 if (lbOpener) { lbOpener.focus(); lbOpener = null; }
             });
