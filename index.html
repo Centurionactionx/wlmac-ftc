@@ -1024,9 +1024,20 @@
                 });
             };
 
+            /* Keep every slide in the horizontal scroll range, but size the
+               viewport from the active item so a short video does not inherit
+               the height of a taller offscreen photo. */
+            var lbSyncTrackHeight = function () {
+                var slide = lbTrack.children[lbCurrent];
+                if (!slide) return;
+                var height = slide.getBoundingClientRect().height;
+                if (height) lbTrack.style.height = height + 'px';
+            };
+
             var lbSetPosition = function () {
                 lbCount.textContent = (lbCurrent + 1) + ' / ' + lbTotal;
                 lbSyncSlides();
+                lbSyncTrackHeight();
                 lbSyncSegments();
             };
 
@@ -1047,11 +1058,15 @@
                 clearTimeout(lbProgScroll);
                 lbProgScroll = setTimeout(function () { lbProgScroll = null; },
                     smooth ? 700 : 150);
+                /* Firefox calculates the scrollable range from the established
+                   slide layout. Activate and measure the destination first so
+                   forward video slides cannot be clamped offscreen. */
+                lbSetPosition();
+                var slideWidth = lbTrack.clientWidth;
                 lbTrack.scrollTo({
-                    left: lbCurrent * lbTrack.clientWidth,
+                    left: lbCurrent * slideWidth,
                     behavior: smooth ? 'smooth' : 'auto'
                 });
-                lbSetPosition();
             };
 
             var lbCancelAnim = function () {
@@ -1625,6 +1640,7 @@
                     document.exitFullscreen().catch(function () { /* already leaving fullscreen */ });
                 }
                 lbTrack.innerHTML = '';
+                lbTrack.style.height = '';
                 if (lbOpener) { lbOpener.focus(); lbOpener = null; }
             });
             /* Courtesy pause while the pointer rests on the media */
