@@ -931,7 +931,7 @@ a:hover { color: var(--gold-300); }
 ------------------------------------------------------------------ */
 .partner-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: clamp(20px, 3vw, 32px);
 }
 .partner-section {
@@ -941,6 +941,7 @@ a:hover { color: var(--gold-300); }
     padding-top: clamp(48px, 6vw, 72px);
 }
 .partner-card {
+    grid-column: span 2;
     min-height: clamp(170px, 20vw, 220px);
     padding: clamp(24px, 4vw, 44px);
     border: 1px solid var(--line-soft);
@@ -971,11 +972,20 @@ a:hover { color: var(--gold-300); }
     max-width: 150px;
     max-height: 128px;
 }
+.partner-card--jukebox {
+    grid-column: 2 / span 2;
+    background: #FFFFFF;
+}
+.partner-card--jukebox img { width: min(50%, 240px); }
 @media (max-width: 620px) {
     .partner-grid { grid-template-columns: 1fr; }
-    .partner-card { min-height: 160px; }
+    .partner-card {
+        grid-column: auto;
+        min-height: 160px;
+    }
     .partner-card--fabworks img { width: min(66%, 250px); }
     .partner-card--savi img { max-height: 112px; }
+    .partner-card--jukebox img { width: min(58%, 220px); }
 }
 
 /* ------------------------------------------------------------------
