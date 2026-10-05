@@ -966,26 +966,26 @@ a:hover { color: var(--gold-300); }
     object-fit: contain;
 }
 .partner-card--fabworks { background: #F5F8F9; }
-.partner-card--fabworks img { width: min(58%, 290px); }
+.partner-card--fabworks img { width: min(80%, 330px); }
 .partner-card--savi { background: #131313; }
 .partner-card--savi img {
     max-width: 150px;
     max-height: 128px;
 }
-.partner-card--jukebox {
-    grid-column: 2 / span 2;
-    background: #FFFFFF;
-}
-.partner-card--jukebox img { width: min(50%, 240px); }
+.partner-card--jukebox { background: #FFFFFF; }
+.partner-card--jukebox img { width: min(66%, 270px); }
+.partner-card--kama { background: #FFFFFF; }
+.partner-card--kama img { width: min(68%, 280px); }
 @media (max-width: 620px) {
     .partner-grid { grid-template-columns: 1fr; }
     .partner-card {
         grid-column: auto;
         min-height: 160px;
     }
-    .partner-card--fabworks img { width: min(66%, 250px); }
+    .partner-card--fabworks img { width: min(84%, 300px); }
     .partner-card--savi img { max-height: 112px; }
-    .partner-card--jukebox img { width: min(58%, 220px); }
+    .partner-card--jukebox img { width: min(72%, 250px); }
+    .partner-card--kama img { width: min(74%, 260px); }
 }
 
 /* ------------------------------------------------------------------
