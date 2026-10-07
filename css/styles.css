@@ -965,6 +965,13 @@ a:hover { color: var(--gold-300); }
     margin: 0;
     object-fit: contain;
 }
+/* odd count: let the last card fill its row instead of sitting alone at half width */
+.partner-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.partner-card--ieee { background: #FFFFFF; }
+.partner-card--ieee img {
+    max-width: 240px;
+    max-height: 136px;
+}
 .partner-card--fabworks { background: #F5F8F9; }
 .partner-card--fabworks img { width: min(80%, 330px); }
 .partner-card--savi { background: #131313; }
@@ -982,6 +989,7 @@ a:hover { color: var(--gold-300); }
         grid-column: auto;
         min-height: 160px;
     }
+    .partner-card--ieee img { max-height: 112px; }
     .partner-card--fabworks img { width: min(84%, 300px); }
     .partner-card--savi img { max-height: 112px; }
     .partner-card--jukebox img { width: min(72%, 250px); }
