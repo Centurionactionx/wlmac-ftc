@@ -965,8 +965,43 @@ a:hover { color: var(--gold-300); }
     margin: 0;
     object-fit: contain;
 }
-/* odd count: let the last card fill its row instead of sitting alone at half width */
-.partner-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+/* Quiet "Visit ..." hint that rises into the bottom padding on hover */
+.partner-card { position: relative; }
+.partner-card__visit {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: clamp(10px, 1.4vw, 16px);
+    font-family: var(--font-display);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+    color: #4A5D72;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .2s ease, transform .3s var(--ease-out-quart);
+    pointer-events: none;
+}
+.partner-card__arrow {
+    display: inline-block;
+    transition: transform .3s var(--ease-out-quart);
+}
+.partner-card:hover .partner-card__visit,
+.partner-card:focus-visible .partner-card__visit {
+    opacity: 1;
+    transform: none;
+}
+.partner-card img { transition: transform .3s var(--ease-out-quart); }
+.partner-card:hover img,
+.partner-card:focus-visible img { transform: translateY(-8px); }
+.partner-card:hover .partner-card__arrow,
+.partner-card:focus-visible .partner-card__arrow { transform: translate(2px, -2px); }
+@media (hover: none) {
+    .partner-card__visit { display: none; }
+}
+/* odd count: centre the last card on its own row at the same width as the rest */
+.partner-card:last-child:nth-child(odd) { grid-column: 2 / span 2; }
 .partner-card--ieee { background: #FFFFFF; }
 .partner-card--ieee img {
     max-width: 240px;
@@ -974,7 +1009,7 @@ a:hover { color: var(--gold-300); }
 }
 .partner-card--fabworks { background: #F5F8F9; }
 .partner-card--fabworks img { width: min(80%, 330px); }
-.partner-card--savi { background: #131313; }
+.partner-card--savi { background: #FFFFFF; }
 .partner-card--savi img {
     max-width: 150px;
     max-height: 128px;
@@ -989,6 +1024,7 @@ a:hover { color: var(--gold-300); }
         grid-column: auto;
         min-height: 160px;
     }
+    .partner-card:last-child:nth-child(odd) { grid-column: auto; }
     .partner-card--ieee img { max-height: 112px; }
     .partner-card--fabworks img { width: min(84%, 300px); }
     .partner-card--savi img { max-height: 112px; }
@@ -1773,6 +1809,7 @@ a:hover { color: var(--gold-300); }
 @keyframes bar-draw { from { transform: scaleX(0); } }
 @media (prefers-reduced-motion: reduce) {
     .shot img, .plate, .btn, .partner-card,
+    .partner-card__visit, .partner-card__arrow, .partner-card img,
     .btn--gold::before, .video-player__button,
     .video-player__controls, .video-player__caption, .lightbox__track,
     .video-player__range::-webkit-slider-thumb,
