@@ -1020,6 +1020,8 @@ a:hover { color: var(--gold-300); }
 .partner-card--kama img { width: min(68%, 280px); }
 .partner-card--xk { background: #FFFFFF; }
 .partner-card--xk img { width: min(86%, 400px); }
+.partner-card--meritus { background: #FFFFFF; }
+.partner-card--meritus img { width: min(72%, 300px); }
 @media (max-width: 620px) {
     .partner-grid { grid-template-columns: 1fr; }
     .partner-card {
@@ -1033,6 +1035,7 @@ a:hover { color: var(--gold-300); }
     .partner-card--jukebox img { width: min(72%, 250px); }
     .partner-card--kama img { width: min(74%, 260px); }
     .partner-card--xk img { width: min(88%, 340px); }
+    .partner-card--meritus img { width: min(78%, 280px); }
 }
 
 /* ------------------------------------------------------------------
