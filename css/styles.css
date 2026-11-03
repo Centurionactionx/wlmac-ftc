@@ -1021,18 +1021,7 @@ a:hover { color: var(--gold-300); }
 .partner-card--xk { background: #FFFFFF; }
 .partner-card--xk img { width: min(86%, 400px); }
 .partner-card--meritus { background: #FFFFFF; }
-.partner-card--meritus { flex-direction: column; gap: 10px; }
 .partner-card--meritus img { width: min(72%, 300px); }
-.partner-card__note {
-    font-family: var(--font-display);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    color: #4A5D72;
-    transition: transform .3s var(--ease-out-quart);
-}
-.partner-card:hover .partner-card__note,
-.partner-card:focus-visible .partner-card__note { transform: translateY(-8px); }
 @media (max-width: 620px) {
     .partner-grid { grid-template-columns: 1fr; }
     .partner-card {
