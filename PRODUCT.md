@@ -20,7 +20,7 @@ Context: a decision-maker skimming a sponsorship packet, likely on a phone or sh
 
 ## Product Purpose
 
-A single-page sponsorship packet that converts interest into booked partnerships for the 2026/27 season. It exists because the program runs on ~$10,000 CAD/season across two teams and is funded by sponsors, not the school. Success = partners reaching out and committing to a tier (Cub / Challenger / Lyon Champion). The page must make a young, two-seasons-in program read as credible and worth backing early.
+A single-page sponsorship packet that converts interest into booked partnerships for the 2026/27 season. It exists because the program runs on ~$10,000 CAD/season across two teams and is funded by sponsors, not the school. Success = partners reaching out and donating (any amount, via TDSB with a tax receipt) or giving parts, tools or time. Since Nov 2026 there are no tiers: the main partner holds the robot and apparel logo space, so every partner gets the same thanks (logo on the site + end-of-season report). The page must make a young, two-seasons-in program read as credible and worth backing early.
 
 ## Brand Personality
 
@@ -35,7 +35,7 @@ A single-page sponsorship packet that converts interest into booked partnerships
 ## Design Principles
 
 1. **Proof over promises.** Real teams, real budget line items, real outreach numbers do the persuading. Show the work; don't assert quality.
-2. **Partnership, not charity.** Frame every ask as a value exchange (logo on the robot, campus reach, sponsor showcase), never a donation plea.
+2. **Partners, not charity cases.** Donors are still partners. Be specific about what their money does (parts, workshops, outreach) and what they get (logo on the site, season report). Don't promise robot or apparel logo space.
 3. **Own the early-stage story.** "Young program on the rise" is an asset — get in before it's obvious. Never hedge or apologize for being two seasons in.
 4. **Craft is the credential.** For an engineering team, a precise, polished page is itself evidence the team can build. Sloppiness would undercut the pitch.
 5. **Respect the sponsor's minute.** Clear tiers, a clear ask, and an obvious next step ("Become a Partner"). Don't make a busy decision-maker dig.
