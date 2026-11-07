@@ -1,0 +1,7 @@
+# wlmacrobotics.ca
+# Everyone is welcome to crawl, including AI search assistants
+# (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) so the team shows up in answers.
+User-agent: *
+Allow: /
+
+Sitemap: https://wlmacrobotics.ca/sitemap.xml
