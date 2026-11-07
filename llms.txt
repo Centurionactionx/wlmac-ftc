@@ -1,0 +1,40 @@
+# WLMAC Robotics
+
+> Student-run FIRST Tech Challenge (FTC) robotics program at William Lyon Mackenzie Collegiate Institute in North York, Toronto, Ontario. Two teams: CyberLyons (FTC #27964, founded 2024) and MechLyons (FTC #32514, founded 2025). Funded by partners and donations; donations go through the Toronto District School Board and get a tax receipt.
+
+- Website: https://wlmacrobotics.ca/
+- Email: hello@wlmacrobotics.ca
+- Instagram: https://www.instagram.com/wlmac.ftc/
+- Donate (TDSB, Robotics initiative pre-selected): https://tdsb.schoolcashonline.com/Fee/Details/457/153/false/true?school=599&initiative=75
+
+## Key facts
+- 6+ FTC competitions in the 2025/26 season, including a Toronto qualifier in February 2026
+- 7 free Arduino workshops, May to August 2026, for 195 kids aged 5 to 18
+- Season budget: about $10,000 CAD for both teams
+- Partners: IEEE, kama.ai, SAVI, XK Innovate, Meritus Academy, Jukebox Print, Fabworks
+- No sponsorship tiers in 2026/27: every partner gets their logo on the website and an end-of-season report
+
+## FAQ
+### What is WLMAC Robotics?
+WLMAC Robotics is the student-run FIRST Tech Challenge (FTC) program at William Lyon Mackenzie Collegiate Institute in North York, Toronto. It fields two teams: CyberLyons (#27964, founded 2024) and MechLyons (#32514, founded 2025). Students design, machine, code and drive every robot themselves.
+
+### What is FIRST Tech Challenge?
+FIRST Tech Challenge is an international robotics league where student teams design and build 18-inch robots for a new game each year, then compete in alliances against other teams.
+
+### How can a business support the team?
+Donate any amount, give parts, tools, machine time or services, or mentor a student. There are no tiers and no minimum: every partner gets their logo on this website and a short end-of-season report showing where their support went.
+
+### Do donations get a tax receipt?
+Yes. Donations go through the Toronto District School Board (TDSB), a registered charity, which emails a tax receipt after checkout. Businesses should pay with the company card and enter the business name in the name fields so the receipt is in the company's name.
+
+### How do I donate?
+Use the TDSB online donation page, which is already set to William Lyon Mackenzie CI and the Robotics initiative. Pick any amount, skip the Tribute section, and check out as a guest. You can also mail a cheque payable to "TDSB-William Lyon Mackenzie CI" to the school.
+
+### Can my logo go on the robot or team shirts?
+Not this season. Our main partner already holds the robot and team shirt space, so every other partner's logo goes on our website instead.
+
+### Where does the money go?
+A season for both teams costs about $10,000 CAD: FTC registration and event fees, robot parts and electronics, fabrication materials, tools, travel, and supplies for free community workshops.
+
+### What outreach does the team do?
+From May to August 2026 the team ran seven free Arduino workshops for 195 kids aged 5 to 18 with North York Community House, Joyce Public School, Dublin Heights E&MS and Human Moves Camp. It also brings robots to the Mackenzie Science and Engineering Olympics, Grade 9 Night and the Library Open House.
